@@ -1,39 +1,31 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
+import { styled } from '@mui/material/styles';
 import wholesaleImg from '../assets/wholesaleImg.png';
-import { Typography } from '@mui/material';
 const Filters = styled('div')(({ theme }) => ({
-    // position: 'relative',
-    width: '632px',
-    height: '48px',
-    // flexShrink: 0,
     borderRadius: '6px',
     background: ' #FCFCFC',
     display: "flex",
+    flexDirection: 'row',
+    columnGap: 8,
+    flexGrow: 1,
     alignItems: "center",
-    justifyContent: 'start',
+    justifyContent: 'center',
     '&:hover': {
         backgroundColor: '#ffffffb5',
     },
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
+        // marginLeft: theme.spacing(1),
         width: '100%',
     },
 }));
 
 const FiltersWrapper = styled('div')(({ theme }) => ({
-   
-    paddingLeft: '20px',
-    height: '100%',
-    // position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-
+    flexDirection: 'row',
+    columnGap: 2,
 }));
 
 
@@ -52,22 +44,21 @@ export default function FilterTab() {
     return (
         <Filters>
             <FiltersWrapper>
-            <img src={wholesaleImg} className="" alt="dashboard"></img>
+            <img src={wholesaleImg} alt="dashboard"></img>
                 <FontWrapper>Business Line</FontWrapper>
             </FiltersWrapper>
             <FiltersWrapper>
-            <img src={wholesaleImg} className="" alt="dashboard"></img>
+            <img src={wholesaleImg} alt="dashboard"></img>
                 <FontWrapper>Source Platform</FontWrapper>
             </FiltersWrapper>
             <FiltersWrapper>
-            <img src={wholesaleImg} className="" alt="dashboard"></img>
+            <img src={wholesaleImg} alt="dashboard"></img>
                 <FontWrapper>Source Platform</FontWrapper>
             </FiltersWrapper>
             <FiltersWrapper>
-            <img src={wholesaleImg} className="" alt="dashboard"></img>
+            <img src={wholesaleImg} alt="dashboard"></img>
                 <FontWrapper>Source Platform</FontWrapper>
             </FiltersWrapper>
-
         </Filters>
     );
 }

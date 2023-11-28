@@ -6,88 +6,85 @@ import CustomTabs from "../components/CustomTabs";
 import SubHeader from "../components/SubHeader";
 import PhysicalSchemaCard from "../components/PhysicalSchemaCard";
 import FilterTab from "../components/FilterTab";
+import styled from '@emotion/styled';
+import React from "react";
+
+const SchemaCardWrapper = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+    columnGap: 20,
+    rowGap: 32,
+}));
+
 
 export default function PhysicalSchema() {
-    const tabsData= ["Dashboard", "Add new UseCase"];
+    const tabsData = ["Dashboard", "Add new UseCase"];
     return (
-        <>
+        <React.Fragment>
             <SubHeader></SubHeader>
-            <Grid container spacing={2} sx={{
-                marginTop: 0.5,
-                marginLeft: 8,
-                width: '90%',
+            <Grid container rowGap={2} sx={{
+                padding: '0 80px', marginTop: '32px', marginLeft: '0px', width: '100%'
             }}>
                 <Grid item xs={12} lg={12} md={12} sx={{
-                    backgroundColor: '#ffffffb5',
-                    borderRadius: '5px',
+                    backgroundColor: '#F3F3F3',
+                    borderRadius: '4px',
+                    paddingLeft: '10px'
                 }}>
                     <CustomTabs data={tabsData}></CustomTabs>
                 </Grid>
-            </Grid>
-            <Grid container spacing={2} sx={{
-                backgroundColor: '#ffffffb5',
-                borderRadius: 3,
-                marginTop: 0.5,
-                marginLeft: 8,
-                width: '90%',
-            }}>
-                <Grid item xs={12} lg={6} md={6}>
-                    <div className="css1">
-                        <Typography variant="h2" sx={{
-                            width: '100%',
-                            color: 'red',
-                            fontWeight: 300,
-                            fontSize: '1.75rem',
+                <Grid item xs={12} lg={12} md={12} sx={{
+                    backgroundColor: '#F3F3F3',
+                    borderRadius: '4px',
+                }}>
+                    <Grid container spacing={0}
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="center">
+                        <Grid item xs={12} lg={6} md={6} sx={{
+                            padding: 8
                         }}>
-                            Welcome to Phyiscal Schema
-                        </Typography>
-                    </div>
-                    <div className="css2">
-                        <Typography variant="h6" className="cssFont2">
-                            testdata featues
-                        </Typography>
-                    </div>
-                </Grid>
-                <Grid item xs={12} lg={6} md={6}>
-                    <img src={PhysicalSchemaImg} className="imgCss1" alt="dashboard"></img>
-                </Grid>
+                            <Typography variant="h2" sx={{
+                                width: '100%',
+                                color: 'red',
+                                fontWeight: 300,
+                                fontSize: '1.75rem',
+                            }}>
+                                Welcome to Phyiscal Schema
+                            </Typography>
 
-            </Grid>
-            <Grid container spacing={2} sx={{
-                marginTop: 0.5,
-                marginLeft: 8,
-                width: '90%',
-            }}>
-                <Grid item xs={12} lg={6} md={4}>
-                    <SearchBar></SearchBar>
+                            <Typography variant="h6" className="cssFont2">
+                                lorem ipsum dolor sit amet consectuer.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} lg={6} md={6}>
+                            <img src={PhysicalSchemaImg} alt="dashboard"></img>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} lg={6} md={8}>
-                   <FilterTab></FilterTab>
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={2} sx={{
-                marginTop: 1,
-                marginLeft: 8,
-                width: '90%',
-            }}>
-                 <Grid item xs={12} lg={3} md={3} sx={{
-                    borderRadius: '5px',
+                <Grid item xs={12} lg={12} md={12} sx={{
+                    borderRadius: '4px',
                 }}>
-                    <PhysicalSchemaCard></PhysicalSchemaCard>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} lg={6} md={6}>
+                            <SearchBar></SearchBar>
+                        </Grid>
+                        <Grid item xs={12} lg={6} md={6}>
+                            <FilterTab></FilterTab>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} lg={3} md={3} sx={{
-                    borderRadius: '5px',
-                }}>
-                    <PhysicalSchemaCard></PhysicalSchemaCard>
-                </Grid>
-                <Grid item xs={12} lg={3} md={3} sx={{
-                    borderRadius: '5px',
-                }}>
-                    <PhysicalSchemaCard></PhysicalSchemaCard>
+                <Grid item xs={12} lg={12} md={12}>
+                    <SchemaCardWrapper>
+                        <PhysicalSchemaCard></PhysicalSchemaCard>
+                        <PhysicalSchemaCard></PhysicalSchemaCard>
+                        <PhysicalSchemaCard></PhysicalSchemaCard>
+                        <PhysicalSchemaCard></PhysicalSchemaCard>
+                        <PhysicalSchemaCard></PhysicalSchemaCard>
+                    </SchemaCardWrapper>
                 </Grid>
             </Grid>
-        </>
+        </React.Fragment>
 
     );
 }

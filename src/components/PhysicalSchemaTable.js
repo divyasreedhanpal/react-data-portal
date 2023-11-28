@@ -285,9 +285,22 @@ export default function PhysicalSchemaTable() {
         <Box sx={{ width: '100%', paddingTop: '10px' }}>
             <Paper sx={{ width: '100%', borderRadius: '0px', boxShadow: 'none' }}>
                 {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
-                <TableContainer>
-                    <Table
-                        sx={{ minWidth: 750, borderCollapse: 'separate', borderSpacing: '0 10px', backgroundColor: '#8080802e' }}
+                <TableContainer style={{ maxHeight: 250 }} sx={{
+                            '&::-webkit-scrollbar': {
+                                backgroundColor: '#FCFCFC',
+                                width: '10px',
+                                outline: '1px solid transparent',
+                                borderRadius: '4px',
+                            },
+                            '&::-webkit-scrollbar-thumb': {
+                                backgroundColor: 'rgba(0,0,0,.10)',
+                                outline: '1px solid transparent',
+                                borderRadius: '4px',
+                            }
+                        }}>
+                    <Table 
+                        stickyHeader
+                        sx={{ minWidth: 750, borderCollapse: 'separate', borderSpacing: '0 10px', backgroundColor: '#8080802e', paddingRight: 1 }}
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
                     >

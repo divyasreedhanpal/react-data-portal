@@ -7,14 +7,14 @@ import DialogActions from '@mui/material/DialogActions';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Checkbox, Divider, FormControlLabel, Grid, IconButton, Typography } from '@mui/material';
-import PhysicalSchemaTable from './PhysicalSchemaTable';
-import schemaImg from '../assets/SchemaImg.png';
-import catalogIcon from '../assets/Catalog.png';
-import dateFormat from '../assets/DateFormat.png';
-import signImg from '../assets/signImg.png';
 import activeIcon from '../assets/Active.png'
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import "./PhysicalSchemaDialog.css"
+import CartItem from './CartItem';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const options = [
   'None',
@@ -33,12 +33,15 @@ const options = [
   'Umbriel',
 ];
 
-export default function PhysicalSchemaDailog(props) {
+export default function CartDailog(props) {
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef(null);
 
   let closeImg = { cursor: 'pointer', float: 'right', marginTop: '5px', width: '20px' };
+
+  const [testValue, setTestValue] = React.useState('');
+  const [testValue1, setTestValue1] = React.useState('');
 
   React.useEffect(() => {
     if (!open) {
@@ -69,8 +72,21 @@ export default function PhysicalSchemaDailog(props) {
     onClose(value);
   };
 
+  // const handleChange = (event) => {
+  //   setValue(event.target.value);
+  // };
+
+
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setTestValue(event.target.value);
+  };
+
+  const styleObj = {
+    padding: '10px 30px 24px 40px', backgroundColor: '#8080802e',
+  };
+
+  const disablediv = {
+    padding: '10px 30px 24px 40px', backgroundColor: '#8080802e',
   };
 
   return (
@@ -98,7 +114,7 @@ export default function PhysicalSchemaDailog(props) {
           <CloseIcon />
         </IconButton>
       </Box>
-      <DialogContent sx={{ padding: '10px 30px 24px 40px', backgroundColor: '#8080802e' }}>
+      <DialogContent sx={styleObj}>
         <Box sx={
           {
             display: 'flex',
@@ -108,94 +124,96 @@ export default function PhysicalSchemaDailog(props) {
         }>
           <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
           <DialogTitle>
-            <Typography>application ratings </Typography>
+            <Typography>selected {options.size} tables in basket </Typography>
           </DialogTitle>
         </Box>
 
         <Divider></Divider>
-        <Grid container columnGap={1}
-          direction='row'
-          sx={{
-            borderRadius: 2,
-            width: '100%',
-            margin: '0px',
+        <Box sx={
+          {
+            display: 'flex',
+            flexDirection: 'row',
+            columnGap: 2,
+            marginTop: 2,
+            padding: 2,
+          }
+        }>
+          <Box sx={{
+            minWidth: 120, flexGrow: 1, display: 'flex',
+            flexDirection: 'column', rowGap: 1
           }}>
-          <Grid item xs={3} lg={3} md={3} sx={
-            {
-              backgroundColor: '#ffffffb5',
-              borderRadius: 1,
-              margin: '10px 0px 0px 0px',
-              padding: '25px'
-            }
-          }>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={catalogIcon} className="" alt="dashboard"></img><Typography className='font'>application ratings </Typography></div>
+            <Typography>Label1</Typography>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">test</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={testValue}
+                label="test"
+                onChange={handleChange}
+                sx={{
+                  backgroundColor: '#FCFCFC'
+                }}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{
+            minWidth: 120, flexGrow: 1, display: 'flex',
+            flexDirection: 'column', rowGap: 1
+          }}>
+            <Typography>Label1</Typography>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label1">test1</InputLabel>
+              <Select
+                labelId="demo-simple-select-label1"
+                id="demo-simple-select1"
+                value={testValue1}
+                label="test1"
+                onChange={handleChange}
+                sx={{
+                  backgroundColor: '#FCFCFC'
+                }}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
+        <Box sx={{
+          overflowY: 'scroll',
+          height: '200px',
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: 2,
+          marginTop: 2,
+          padding: 2,
+          '&::-webkit-scrollbar': {
+            backgroundColor: '#FCFCFC',
+            width: '10px',
+            outline: '1px solid transparent',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgba(0,0,0,.10)',
+            outline: '1px solid transparent',
+            borderRadius: '4px',
+          }
+        }}>
 
-            <small style={{
-              marginLeft: '20px'
-            }}>wrrrr </small>
-          </Grid>
-          <Grid item xs={3} lg={3} md={3} sx={
-            {
-              backgroundColor: '#ffffffb5',
-              borderRadius: 1,
-              margin: '10px 0px 0px 0px',
-              padding: '25px'
-            }
-          }>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={schemaImg} className="" alt="dashboard"></img> <Typography className='font'>application ratings </Typography></div>
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+        </Box>
 
-            <small style={{
-              marginLeft: '20px'
-            }}>wrrrr </small>
-          </Grid>
-          <Grid item xs={3} lg={3} md={3} sx={
-            {
-              backgroundColor: '#ffffffb5',
-              borderRadius: 1,
-              margin: '10px 0px 0px 0px',
-              padding: '25px'
-            }
-          }>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={dateFormat} className="" alt="dashboard"></img>  <Typography className='font'>application ratings </Typography></div>
-
-            <small style={{
-              marginLeft: '20px'
-            }}>wrrrr </small>
-          </Grid>
-          <Grid item xs={3} lg={2.5} md={3} sx={
-            {
-              backgroundColor: '#ffffffb5',
-              borderRadius: 1,
-              margin: '10px 0px 0px 0px',
-              padding: '25px'
-            }
-          }>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={signImg} className="" alt="dashboard"></img><Typography className='font'>application ratings </Typography></div>
-
-            <small style={{
-              marginLeft: '10px'
-            }}>wrrrr </small>
-          </Grid>
-        </Grid>
-
-
-        <PhysicalSchemaTable />
       </DialogContent>
       <DialogActions sx={{
         justifyContent: 'space-between',
@@ -219,13 +237,13 @@ export default function PhysicalSchemaDailog(props) {
             backgroundColor: '#fff',
             color: '#3c52b2',
           },
-        }}>Add to cart</Button>
+        }}>Next</Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-PhysicalSchemaDailog.propTypes = {
+CartDailog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   value: PropTypes.string.isRequired,

@@ -1,13 +1,8 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import activeIcon from '../assets/Active.png'
-import { useNavigate } from "react-router-dom";
 import wholesaleImg from '../assets/wholesaleImg.png';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import PhysicalSchemaDailog from './PhysicalSchemaDailog';
 import styled from '@emotion/styled';
 
@@ -28,18 +23,12 @@ export default function PhysicalSchemaCard() {
     }
   };
 
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/physical-schema');
-  };
-
   const CardFontWrapper = styled('p')(({ theme }) => ({
     fontWeight: 400,
     fontSize: 12,
     lineHeight: '16px',
     padding: '0px 0px 0px 10px',
-    color:' #333',
+    color: ' #333',
     fontFamily: 'Univers Next for HSBC',
     fontStyle: 'normal',
     // letterSpacing: 1,
@@ -49,7 +38,7 @@ export default function PhysicalSchemaCard() {
     fontWeight: 500,
     fontSize: 20,
     lineHeight: '24px',
-    color:' #333',
+    color: ' #333',
     fontFamily: 'Univers Next for HSBC',
     fontStyle: 'normal',
     pointerEvents: 'none'
@@ -58,19 +47,14 @@ export default function PhysicalSchemaCard() {
 
   const ContentWrapper = styled('div')(({ theme }) => ({
     // padding: theme.spacing(1, 1, 1, 1),
-    height: '100%',
-    // position: 'absolute',
     pointerEvents: 'none',
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
   }));
 
   const FontButtontWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 1),
-    height: '100%',
-    // width: 10,
-    // position: 'absolute',
     color: '#333',
     fontFamily: 'Univers Next for HSBC',
     fontSize: '10px',
@@ -92,20 +76,49 @@ export default function PhysicalSchemaCard() {
         onClose={handleClose}
         value={value}
       />
-      <Card sx={{ display: 'flex', width: 416, overflow: 'unset', height: 234,borderRadius:6,background:'#FCFCFC' }} onClick={handleClickListItem}>
-        {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <CardContent>
-            <StorageIcon></StorageIcon>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              application-ratings
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" onClick={handleClick}>PII</Button>
-            <Button size="small" onClick={handleClick}>SourceSystem</Button>
-          </CardActions>
-        </Box> */}
-        <Grid container sx={{width:'302px'}}>
+      <Card sx={{ display: 'flex', width: '32%', overflow: 'unset', borderRadius: '4px', background: '#FCFCFC' }} onClick={handleClickListItem}>
+        <Box sx={{ display: 'inline-flex', flexDirection: 'row',padding:'4px 4px 24px 4px' }}>
+          <Box sx={{
+            padding: '20px',
+          }}><img src={activeIcon} alt="dashboard"></img></Box>
+          <Box sx={{
+            flexGrow: 1
+          }}>
+            <CardTitleFontWrapper><b>application-ratings</b></CardTitleFontWrapper>
+            <Box sx={{
+              display: 'inline-flex',
+              flexWrap: 'wrap',
+              gap: 1,
+            }}>
+              <ContentWrapper>
+                <img src={wholesaleImg} alt="dashboard"></img>
+                <CardFontWrapper>WholeSale</CardFontWrapper>
+              </ContentWrapper>
+              <ContentWrapper>
+                <img src={wholesaleImg} alt="dashboard"></img>
+                <CardFontWrapper>Data-visualisation</CardFontWrapper>
+              </ContentWrapper>
+              <ContentWrapper>
+                <img src={wholesaleImg} alt="dashboard"></img>
+                <CardFontWrapper>HDP | gid_gsid_0122</CardFontWrapper>
+              </ContentWrapper>
+            </Box>
+            <Box sx={{
+              display: 'inline-flex',
+              flexDirection: 'row',
+              columnGap: 1,
+            }}>
+              <FontButtontWrapper>
+                PII
+              </FontButtontWrapper>
+              <FontButtontWrapper>
+                SourceSystem
+              </FontButtontWrapper>
+            </Box>
+          </Box>
+
+        </Box>
+        {/* <Grid container sx={{width:'302px'}}>
           <Grid item xs={3} lg={3} md={3}>
             <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
           </Grid>
@@ -146,7 +159,7 @@ export default function PhysicalSchemaCard() {
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Card>
     </>
   );
