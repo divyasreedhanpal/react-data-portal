@@ -13,8 +13,10 @@ import catalogIcon from '../assets/Catalog.png';
 import dateFormat from '../assets/DateFormat.png';
 import signImg from '../assets/signImg.png';
 import activeIcon from '../assets/Active.png'
+import closeImage from '../assets/Close.png';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import "./PhysicalSchemaDialog.css"
+import styled from '@emotion/styled';
 
 const options = [
   'None',
@@ -32,6 +34,22 @@ const options = [
   'Triton',
   'Umbriel',
 ];
+const popuptitlewrapper = styled('h2')(({ theme }) => ({
+  color: '#333',
+  fontFamily: 'Univers Next for HSBC',
+  fontSize: '20px',
+  fontStyle: 'normal',
+  fontWeight: '500',
+  lineHeight: '24px'
+}));
+const popupcontentwrapper = styled('p')(({ theme }) => ({
+  color: '#333',
+  fontFamily: 'Univers Next for HSBC',
+  fontSize: '12px',
+  fontStyle: 'normal',
+  fontWeight: '500',
+  lineHeight: '24px'
+}));
 
 export default function PhysicalSchemaDailog(props) {
   const { onClose, value: valueProp, open, ...other } = props;
@@ -75,7 +93,10 @@ export default function PhysicalSchemaDailog(props) {
 
   return (
     <Dialog
-      sx={{ '& .MuiDialog-paper': { width: '100%' }, backgroundColor: '#8080802e' }}
+      sx={{ '& .MuiDialog-paper': { width: '100%',margin:'80px',borderRadius: '6px 6px 0px 0px',
+      background: '#F3F3F3',
+      boxShadow: '0px 6px 20px 0px rgba(0, 0, 0, 0.10)'
+       }, backgroundColor: '#F3F3F3' }}
       maxWidth="lg"
       TransitionProps={{ onEntering: handleEntering }}
       open={open}
@@ -95,7 +116,7 @@ export default function PhysicalSchemaDailog(props) {
           onClick={handleCancel}
           aria-label="close"
         >
-          <CloseIcon />
+          <img src={closeImage} alt="dashboard"></img>
         </IconButton>
       </Box>
       <DialogContent sx={{ padding: '10px 30px 24px 40px', backgroundColor: '#8080802e' }}>
@@ -107,9 +128,11 @@ export default function PhysicalSchemaDailog(props) {
           }
         }>
           <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
+          
           <DialogTitle>
-            <Typography>application ratings </Typography>
+            <popuptitlewrapper>application ratings </popuptitlewrapper>
           </DialogTitle>
+          
         </Box>
 
         <Divider></Divider>
@@ -130,13 +153,10 @@ export default function PhysicalSchemaDailog(props) {
           }>
             <div style={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={catalogIcon} className="" alt="dashboard"></img><Typography className='font'>application ratings </Typography></div>
+              flexDirection: 'row'
+            }}><img src={catalogIcon} className="mr16" alt="dashboard"></img><popupcontentwrapper>application ratings </popupcontentwrapper></div>
 
-            <small style={{
-              marginLeft: '20px'
-            }}>wrrrr </small>
+            <small>wrrrr </small>
           </Grid>
           <Grid item xs={3} lg={3} md={3} sx={
             {
@@ -148,13 +168,10 @@ export default function PhysicalSchemaDailog(props) {
           }>
             <div style={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={schemaImg} className="" alt="dashboard"></img> <Typography className='font'>application ratings </Typography></div>
+              flexDirection: 'row'
+            }}><img src={schemaImg} className="mr16" alt="dashboard"></img> <popupcontentwrapper>application ratings </popupcontentwrapper></div>
 
-            <small style={{
-              marginLeft: '20px'
-            }}>wrrrr </small>
+            <small>wrrrr </small>
           </Grid>
           <Grid item xs={3} lg={3} md={3} sx={
             {
@@ -166,13 +183,10 @@ export default function PhysicalSchemaDailog(props) {
           }>
             <div style={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={dateFormat} className="" alt="dashboard"></img>  <Typography className='font'>application ratings </Typography></div>
+              flexDirection: 'row'
+            }}><img src={dateFormat} className="mr16" alt="dashboard"></img>  <popupcontentwrapper>application ratings </popupcontentwrapper></div>
 
-            <small style={{
-              marginLeft: '20px'
-            }}>wrrrr </small>
+            <small>wrrrr </small>
           </Grid>
           <Grid item xs={3} lg={2.5} md={3} sx={
             {
@@ -184,13 +198,10 @@ export default function PhysicalSchemaDailog(props) {
           }>
             <div style={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}><img src={signImg} className="" alt="dashboard"></img><Typography className='font'>application ratings </Typography></div>
+              flexDirection: 'row'
+            }}><img src={signImg} className="mr16" alt="dashboard"></img><popupcontentwrapper>application ratings </popupcontentwrapper></div>
 
-            <small style={{
-              marginLeft: '10px'
-            }}>wrrrr </small>
+            <small>wrrrr </small>
           </Grid>
         </Grid>
 

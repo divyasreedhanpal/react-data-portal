@@ -22,7 +22,8 @@ import SubmitCart from './SubmitCart';
 
 const pages = ['Home -> Physical Schema'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const cartItems = ['application-ratings','egsgfuewhi ewjkghewkng hfshfdhdffd'];
+const cartItems = ['application-ratings', 'application-rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr-tttttttttttttt', 'application-ratings'];
+
 
 function SubHeader() {
 
@@ -64,7 +65,7 @@ function SubHeader() {
 
   return (
     <AppBar position="static">
-      <CartDailog
+       <SubmitCart
         id="ringtone-menu"
         keepMounted
         open={open}
@@ -215,11 +216,13 @@ function SubHeader() {
                     lineHeight: '24px', marginLeft: '16px'
                   }}>My cart ({cartItems.length})</Typography>
                 {cartItems.map((item) => (
-                  <MenuItem key={item} onClick={handleCloseCartMenu} sx={{paddingLeft:'5px'}}>
+                  <MenuItem key={item} onClick={handleCloseCartMenu} sx={{
+                    width: '400px',
+                  }}>
                     <ListItemIcon>
                       <img src={activeIcon} alt="dashboard"></img>
                     </ListItemIcon>
-                    <ListItemText primary={item} primaryTypographyProps={{style:{whiteSpace:'normal'}}}></ListItemText>
+                    <ListItemText primary={item} primaryTypographyProps={{ style: { whiteSpace: 'normal', wordWrap: 'break-word' } }}></ListItemText>
                   </MenuItem>
                 ))}
                 <Divider></Divider>

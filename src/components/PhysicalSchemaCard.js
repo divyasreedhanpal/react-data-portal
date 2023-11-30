@@ -121,7 +121,7 @@ export default function PhysicalSchemaCard() {
         {/* <Grid container sx={{width:'302px'}}>
           <Grid item xs={3} lg={3} md={3}>
             <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
-          </Grid>
+          </Grid>]
           <Grid item xs={9} lg={9} md={9}>
             <Grid container spacing={1}>
               <Grid item xs={12} lg={12} md={12}>
