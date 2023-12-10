@@ -5,7 +5,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Dialog from '@mui/material/Dialog';
-import CloseIcon from '@mui/icons-material/Close';
+import closeImage from '../assets/Close.png';
 import TextField from '@mui/material/TextField';
 import { Box, Divider, IconButton, Typography, Checkbox, FormControlLabel, Grid } from '@mui/material';
 import "./PhysicalSchemaDialog.css";
@@ -27,9 +27,10 @@ import { addCart } from '../reducers/cartReducer';
 
 
 export default function SubmitCart(props) {
-    const { onClose, value: valueProp, open, ...other } = props;
-    const [value, setValue] = React.useState(valueProp);
+    const { onClose, open, ...other } = props;
+    const [value, setValue] = React.useState(false);
     const [show, setShow] = React.useState(false);
+    const [selected, setSelected] = React.useState([]);
     const dispatch = useDispatch();
 
     const [data, setData] = React.useState({});
@@ -40,40 +41,59 @@ export default function SubmitCart(props) {
 
     const cartItems = useSelector(state => state.cartItems.cartItems);
 
-    const selected = useSelector(state => state.cartItems.cartItems);
+    const selectedCarts = useSelector(state => state.cartItems.cartItems);
 
     React.useEffect(() => {
+        const selectedData = cartItems.filter(e => e.id === data.id);
+        if (selectedData.length !== 0) {
+          setSelected(selectedData[0].selected);
+          if (selectedData[0].selected.length === data.variables.length) {
+            setValue(true);
+          } else {
+            setValue(false);
+          }
+        }
         setShow(false);
         setDetailsShow(false);
-        setData({});
-        if (!open) {
-            setValue(valueProp);
-        }
-    }, [valueProp, open]);
+    }, [open, cartItems, data]);
 
-    const isSelected = (id) => selected.indexOf(id).isSelected;
+    const isSelected = (id) => selectedCarts.indexOf(id).isSelected;
 
     const setAllSelected = (rows) => {
-        // setSelected(rows)
+        setSelected(rows)
     }
 
     const handleEntering = () => {
     };
 
     const handleClick = (data) => {
-        console.log("cart item clicked");
+        const currentItem =  cartItems.find(e => e.id === data.id);
+        console.log(currentItem);
         setShow(true);
         setDetailsShow(true);
-        setData(data);
+        setData(currentItem);
+        setSelected(currentItem.selected);
     };
 
     const handleAddCart = () => {
+        console.log(selected);
         const newData = {...data, selected : selected, isSelected : true};
+        setData({...data, selected: selected});
         dispatch(addCart(newData));
         handleBack();
       };
 
     const handleSelectAllClick = (event) => {
+        setValue(event.target.checked);
+        if (event.target.checked) {
+          const newSelected = data.variables.map((n) => n.id);
+          setSelected(newSelected);
+          return;
+        }
+        setSelected([]);
+    };
+
+    const handleSelectAllCartClick = (event) => {
         // if (event.target.checked) {
         //   const newSelected = rows.map((n) => n.id);
         //   setSelected(newSelected);
@@ -105,7 +125,7 @@ export default function SubmitCart(props) {
     };
 
     const styleObj = {
-        padding: '10px 30px 24px 40px', backgroundColor: '#FCFCFC',
+        padding: '10px 30px 24px 40px', backgroundColor: '#F3F3F3',
     };
 
     const disablediv = {
@@ -114,7 +134,13 @@ export default function SubmitCart(props) {
 
     return (
         <Dialog
-            sx={{ '& .MuiDialog-paper': { width: '100%' }, backgroundColor: '#FCFCFC' }}
+        sx={{
+            '& .MuiDialog-paper': {
+              width: '100%', margin: '80px', borderRadius: '6px 6px 0px 0px',
+              background: '#F3F3F3',
+              boxShadow: '0px 6px 20px 0px rgba(0, 0, 0, 0.10)'
+            }, backgroundColor: '#F3F3F3'
+          }}
             maxWidth="lg"
             TransitionProps={{ onEntering: handleEntering }}
             open={open}
@@ -124,8 +150,8 @@ export default function SubmitCart(props) {
                 {
                     display: 'flex',
                     justifyContent: 'end',
-                    padding: '10px',
-                    backgroundColor: '#FCFCFC'
+                    padding: '10px 10px 0px 10px',
+                    backgroundColor: '#F3F3F3'
                 }
             }>
                 <IconButton
@@ -134,7 +160,7 @@ export default function SubmitCart(props) {
                     onClick={handleCancel}
                     aria-label="close"
                 >
-                    <CloseIcon />
+                     <img src={closeImage} alt="dashboard"></img>
                 </IconButton>
             </Box>
             {show ? <DialogContent sx={styleObj}>
@@ -249,7 +275,7 @@ export default function SubmitCart(props) {
                             }}>wrrrr </small>
                         </Grid>
                     </Grid>
-                    <PhysicalSchemaTable variables={data.variables} setAllSelected={setAllSelected} selected={[]} setValue={setValue} />
+                    <PhysicalSchemaTable setAllSelected={setAllSelected} setValue={setValue} data={data} selected={selected} setSelected={setSelected}/>
                 </> : <Box sx={
                     {
                         display: 'flex',
@@ -257,11 +283,41 @@ export default function SubmitCart(props) {
                         rowGap: 2,
                         marginTop: 2,
                         padding: 2,
+                       
                     }
                 }>
-                    <Typography>Dear user,</Typography>
-                    <Typography>You are going to add those tables to use case <b>AWB_DFDS.</b></Typography>
-                    <Typography>Permissions will be granted after request approved. To proceed further, please provide the fallowing information.</Typography>
+                    <Typography sx={{
+                         color: '#333',
+                         fontFamily: 'Univers Next for HSBC',
+                         fontSize: '16px',
+                         fontStyle: 'normal',
+                         fontWeight: '400',
+                         lineHeight: '24px'
+                    }} > Dear user,</Typography>
+                    <Typography sx={{
+                         color: '#333',
+                         fontFamily: 'Univers Next for HSBC',
+                         fontSize: '16px',
+                         fontStyle: 'normal',
+                         fontWeight: '400',
+                         lineHeight: '24px'
+                    }}>You are going to add those tables to use case 
+                    <b sx={{
+                         color: '#333',
+                         fontFamily: 'Univers Next for HSBC',
+                         fontSize: '16px',
+                         fontStyle: 'normal',
+                         fontWeight: '700',
+                         lineHeight: '24px'
+                    }}>AWB_DFDS.</b></Typography>
+                    <Typography sx={{
+                         color: '#333',
+                         fontFamily: 'Univers Next for HSBC',
+                         fontSize: '16px',
+                         fontStyle: 'normal',
+                         fontWeight: '400',
+                         lineHeight: '24px'
+                    }}>Permissions will be granted after request approved. To proceed further, please provide the fallowing information.</Typography>
                     <Box sx={
                         {
                             display: 'flex',
@@ -269,10 +325,24 @@ export default function SubmitCart(props) {
                             rowGap: 2,
                             marginTop: 2,
                         }}>
-                        <Typography><b>Data Visa *</b></Typography>
-                        <Typography>Please provide the Data visa for data consumption.</Typography>
+                        <Typography sx={{
+                            color: '#333',
+                            fontFamily: 'Univers Next for HSBC',
+                            fontSize: '20px',
+                            fontStyle: 'normal',
+                            fontWeight: '700',
+                            lineHeight: '20px'
+                        }}>Data Visa *</Typography>
+                        <Typography sx={{
+                             color: '#333',
+                             fontFamily: 'Univers Next for HSBC',
+                             fontSize: '16px',
+                             fontStyle: 'normal',
+                             fontWeight: '400',
+                             lineHeight: '24px'
+                        }}>Please provide the Data visa for data consumption.</Typography>
                         <TextField id="outlined-basic" label="Input text" variant="outlined" sx={{
-                            maxWidth: '50%',
+                            maxWidth: '50%',height:'48px'
                         }} />
                     </Box>
                     <Box sx={
@@ -282,9 +352,23 @@ export default function SubmitCart(props) {
                             rowGap: 2,
                             marginTop: 2,
                         }}>
-                        <Typography><b>Business Justification *</b></Typography>
-                        <Typography>Request will be rejected if no business justification</Typography>
-                        <TextField id="outlined-basic" label="Input text" variant="outlined" multiline rows={10} />
+                        <Typography sx={{
+                            color: '#333',
+                            fontFamily: 'Univers Next for HSBC',
+                            fontSize: '20px',
+                            fontStyle: 'normal',
+                            fontWeight: '700',
+                            lineHeight: '20px'
+                        }}>Business Justification *</Typography>
+                        <Typography sx={{
+                             color: '#333',
+                             fontFamily: 'Univers Next for HSBC',
+                             fontSize: '16px',
+                             fontStyle: 'normal',
+                             fontWeight: '400',
+                             lineHeight: '24px'
+                        }}>Request will be rejected if no business justification</Typography>
+                        <TextField id="outlined-basic" label="Input text" variant="outlined" multiline rows={10} sx={{height:'273.5px'}} />
                     </Box>
                 </Box>
                 }
@@ -294,8 +378,7 @@ export default function SubmitCart(props) {
                     <Box sx={
                         {
                             display: 'flex',
-                            justifyContent: 'flex-start',
-                            padding: '10px'
+                            justifyContent: 'flex-start'
                         }
                     }>
                         <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
@@ -399,7 +482,7 @@ export default function SubmitCart(props) {
                       // indeterminate={numSelected > 0 && numSelected < rowCount}
                       checked={value}
                       checkedIcon={<CheckBoxOutlinedIcon />}
-                    //   onChange={handleSelectAllClick}
+                      onChange={handleSelectAllClick}
                       inputProps={{
                         'aria-label': 'Select all',
                       }} />} label="Select All">
@@ -417,12 +500,18 @@ export default function SubmitCart(props) {
             : <DialogActions sx={{
                 justifyContent: 'flex-end',
                 padding: '10px 30px 24px 40px',
-                backgroundColor: '#8080802e'
+                backgroundColor: '#F3F3F3'
             }}>
                 <Button onClick={handleOk} sx={{
-                    backgroundColor: 'red',
-                    borderRadius: '0px',
-                    color: 'white',
+                 color: '#FFF',
+                 fontFamily: 'Univers Next for HSBC',
+                 fontSize: '16px',
+                 fontStyle: 'normal',
+                 fontWeight: '400',
+                 lineHeight: '24px',
+                 backgroundColor: '#DB0011',
+                 borderRadius: '0px',
+                 textTransform:'none',
                     '&:hover': {
                         backgroundColor: '#fff',
                         color: '#3c52b2',
@@ -432,21 +521,27 @@ export default function SubmitCart(props) {
                 <DialogActions sx={{
                     justifyContent: 'space-between',
                     padding: '10px 30px 24px 40px',
-                    backgroundColor: '#8080802e'
+                    backgroundColor: '#F3F3F3'
                 }}>
                     <FormControlLabel control={<Checkbox color="primary"
                         // indeterminate={numSelected > 0 && numSelected < rowCount}
                         // checked={rowCount > 0 && numSelected === rowCount}
                         checkedIcon={<CheckBoxOutlinedIcon />}
-                        onChange={handleSelectAllClick}
+                        onChange={handleSelectAllCartClick}
                         inputProps={{
                             'aria-label': 'Select all',
                         }} />} label="Select All">
                     </FormControlLabel>
                     <Button onClick={handleNext} sx={{
-                        backgroundColor: 'red',
+                        color: '#FFF',
+                        fontFamily: 'Univers Next for HSBC',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        lineHeight: '24px',
+                        backgroundColor: '#DB0011',
                         borderRadius: '0px',
-                        color: 'white',
+                        textTransform:'none',
                         '&:hover': {
                             backgroundColor: '#fff',
                             color: '#3c52b2',
@@ -461,5 +556,4 @@ export default function SubmitCart(props) {
 SubmitCart.propTypes = {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    value: PropTypes.string.isRequired,
 };

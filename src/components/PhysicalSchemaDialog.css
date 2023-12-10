@@ -1,20 +1,37 @@
-.font
-{
-color: #333;
-font-family: Univers Next for HSBC;
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: 12px;
+.font {
+    color: #333;
+    font-family: Univers Next for HSBC;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 12px;
+    padding: 10px;
 }
-.MuiTableCell-root td{
-color: #333;
-font-family: Univers Next for HSBC;
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: 24px;
+
+.MuiTableCell-root td {
+    color: #333;
+    font-family: Univers Next for HSBC;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
 }
-.mr16{
+
+
+.labelFont {
+    color: #333;
+    font-family: Univers Next for HSBC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.mr16 {
     margin-right: 16px;
+}
+
+.copyIcon {
+    padding: 10px;
+    vertical-align: middle;
 }
