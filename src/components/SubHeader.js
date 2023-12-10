@@ -13,23 +13,23 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import closeImg from '../assets/Close.png';
 import activeIcon from '../assets/Active.png';
 import Divider from '@mui/material/Divider';
-import CartDailog from './CartDailog';
 import SubmitCart from './SubmitCart';
+import { useSelector } from 'react-redux';
 
 const pages = ['Home -> Physical Schema'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const cartItems = ['application-ratings', 'application-rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr-tttttttttttttt', 'application-ratings'];
-
+// const cartItems = ['application-ratings', 'application-ratings111111111111111111111111111111111111', 'application-ratings'];
 
 function SubHeader() {
 
   const [anchorElCart, setAnchorElCart] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+  const cartItems = useSelector(state => state.cartItems.cartItems);
+  
 
   const handleOpenCartMenu = (event) => {
     setAnchorElCart(event.currentTarget);
@@ -65,7 +65,7 @@ function SubHeader() {
 
   return (
     <AppBar position="static">
-       <SubmitCart
+      <SubmitCart
         id="ringtone-menu"
         keepMounted
         open={open}
@@ -216,13 +216,13 @@ function SubHeader() {
                     lineHeight: '24px', marginLeft: '16px'
                   }}>My cart ({cartItems.length})</Typography>
                 {cartItems.map((item) => (
-                  <MenuItem key={item} onClick={handleCloseCartMenu} sx={{
+                  <MenuItem key={item.id} onClick={handleCloseCartMenu} sx={{
                     width: '400px',
                   }}>
                     <ListItemIcon>
                       <img src={activeIcon} alt="dashboard"></img>
                     </ListItemIcon>
-                    <ListItemText primary={item} primaryTypographyProps={{ style: { whiteSpace: 'normal', wordWrap: 'break-word' } }}></ListItemText>
+                    <ListItemText primary={item.schemaName} primaryTypographyProps={{ style: { whiteSpace: 'normal', wordWrap: 'break-word' } }}></ListItemText>
                   </MenuItem>
                 ))}
                 <Divider></Divider>
@@ -237,7 +237,8 @@ function SubHeader() {
                       backgroundColor: '#fff',
                       color: '#3c52b2',
                     },
-                  }}>Go to my cart
+                  }}>
+                  Go to my cart
                 </Button>
               </Box>
             </Menu>
@@ -250,9 +251,7 @@ function SubHeader() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{
-                mt: '45px'
-              }}
+              sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorOrigin={{
                 vertical: 'top',

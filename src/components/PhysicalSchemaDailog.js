@@ -14,26 +14,13 @@ import dateFormat from '../assets/DateFormat.png';
 import signImg from '../assets/signImg.png';
 import activeIcon from '../assets/Active.png'
 import closeImage from '../assets/Close.png';
+import { useDispatch, useSelector } from 'react-redux';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import "./PhysicalSchemaDialog.css"
 import styled from '@emotion/styled';
+import { addCart } from '../reducers/cartReducer';
 
-const options = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
-];
+
 const popuptitlewrapper = styled('h2')(({ theme }) => ({
   color: '#333',
   fontFamily: 'Univers Next for HSBC',
@@ -52,44 +39,53 @@ const popupcontentwrapper = styled('p')(({ theme }) => ({
 }));
 
 export default function PhysicalSchemaDailog(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
-  const [value, setValue] = React.useState(valueProp);
-  const radioGroupRef = React.useRef(null);
+  const { onClose, data, open, ...other } = props;
+  const [value, setValue] = React.useState(false);
+  const [selected, setSelected] = React.useState([]);
 
-  let closeImg = { cursor: 'pointer', float: 'right', marginTop: '5px', width: '20px' };
+  const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (!open) {
-      setValue(valueProp);
-    }
-  }, [valueProp, open]);
 
-  const handleEntering = () => {
-    // if (radioGroupRef.current != null) {
-    //   radioGroupRef.current.focus();
-    // }
-  };
+  const cartItems = useSelector(state => state.cartItems);
+  // React.useEffect(() => {
+  //   if (!open) {
+  //     setValue(valueProp);
+  //   }
+  // }, [valueProp, open]);
+
+  // const handleEntering = () => {
+  //   if (radioGroupRef.current != null) {
+  //     radioGroupRef.current.focus();
+  //   }
+  // };
 
   const handleCancel = () => {
     onClose();
   };
 
+  const setAllSelected = (rows) => {
+    setSelected(rows)
+  } 
+
   const handleSelectAllClick = (event) => {
-    // if (event.target.checked) {
-    //   const newSelected = rows.map((n) => n.id);
-    //   setSelected(newSelected);
-    //   return;
-    // }
-    // setSelected([]);
+    setValue(event.target.checked);
+    if (event.target.checked) {
+      const newSelected = data.variables.map((n) => n.id);
+      setSelected(newSelected);
+      return;
+    }
+    setSelected([]);
   };
 
-  const handleOk = () => {
-    onClose(value);
+  const handleAddCart = () => {
+    const newData = {...data, selected : selected, isSelected : true};
+    dispatch(addCart(newData));
+    onClose();
   };
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setValue(event.target.value);
+  // };
 
   return (
     <Dialog
@@ -98,7 +94,7 @@ export default function PhysicalSchemaDailog(props) {
       boxShadow: '0px 6px 20px 0px rgba(0, 0, 0, 0.10)'
        }, backgroundColor: '#F3F3F3' }}
       maxWidth="lg"
-      TransitionProps={{ onEntering: handleEntering }}
+      // TransitionProps={{ onEntering: handleEntering }}
       open={open}
       {...other}
     >
@@ -107,7 +103,7 @@ export default function PhysicalSchemaDailog(props) {
           display: 'flex',
           justifyContent: 'end',
           padding: '10px',
-          backgroundColor: '#8080802e'
+          backgroundColor: '#F3F3F3'
         }
       }>
         <IconButton
@@ -119,7 +115,7 @@ export default function PhysicalSchemaDailog(props) {
           <img src={closeImage} alt="dashboard"></img>
         </IconButton>
       </Box>
-      <DialogContent sx={{ padding: '10px 30px 24px 40px', backgroundColor: '#8080802e' }}>
+      <DialogContent sx={{ padding: '10px 30px 24px 40px', backgroundColor: '#F3F3F3' }}>
         <Box sx={
           {
             display: 'flex',
@@ -128,11 +124,9 @@ export default function PhysicalSchemaDailog(props) {
           }
         }>
           <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
-          
           <DialogTitle>
-            <popuptitlewrapper>application ratings </popuptitlewrapper>
+          <popuptitlewrapper>{data.schemaName}</popuptitlewrapper>
           </DialogTitle>
-          
         </Box>
 
         <Divider></Divider>
@@ -154,9 +148,9 @@ export default function PhysicalSchemaDailog(props) {
             <div style={{
               display: 'flex',
               flexDirection: 'row'
-            }}><img src={catalogIcon} className="mr16" alt="dashboard"></img><popupcontentwrapper>application ratings </popupcontentwrapper></div>
+            }}><img src={schemaImg} className="mr16" alt="dashboard"></img> <popupcontentwrapper>{data.type} </popupcontentwrapper></div>
 
-            <small>wrrrr </small>
+            <small >wrrrr </small>
           </Grid>
           <Grid item xs={3} lg={3} md={3} sx={
             {
@@ -186,7 +180,7 @@ export default function PhysicalSchemaDailog(props) {
               flexDirection: 'row'
             }}><img src={dateFormat} className="mr16" alt="dashboard"></img>  <popupcontentwrapper>application ratings </popupcontentwrapper></div>
 
-            <small>wrrrr </small>
+            <small >wrrrr </small>
           </Grid>
           <Grid item xs={3} lg={2.5} md={3} sx={
             {
@@ -199,33 +193,38 @@ export default function PhysicalSchemaDailog(props) {
             <div style={{
               display: 'flex',
               flexDirection: 'row'
-            }}><img src={signImg} className="mr16" alt="dashboard"></img><popupcontentwrapper>application ratings </popupcontentwrapper></div>
+             
+            }}><img src={signImg} className="mr16" alt="dashboard"></img><popupcontentwrapper >application ratings </popupcontentwrapper></div>
 
             <small>wrrrr </small>
           </Grid>
         </Grid>
-
-
-        <PhysicalSchemaTable />
+        <PhysicalSchemaTable variables={data.variables} setAllSelected={setAllSelected} selected={selected} setValue={setValue}/>
       </DialogContent>
       <DialogActions sx={{
         justifyContent: 'space-between',
         padding: '10px 30px 24px 40px',
-        backgroundColor: '#8080802e'
+        backgroundColor: '#F3F3F3'
       }}>
         <FormControlLabel control={<Checkbox color="primary"
           // indeterminate={numSelected > 0 && numSelected < rowCount}
-          // checked={rowCount > 0 && numSelected === rowCount}
+          checked={value}
           checkedIcon={<CheckBoxOutlinedIcon />}
           onChange={handleSelectAllClick}
           inputProps={{
             'aria-label': 'Select all',
           }} />} label="Select All">
         </FormControlLabel>
-        <Button onClick={handleOk} sx={{
-          backgroundColor: 'red',
+        <Button onClick={handleAddCart} sx={{
+          color: '#FFF',
+          fontFamily: 'Univers Next for HSBC',
+          fontSize: '16px',
+          fontStyle: 'normal',
+          fontWeight: '400',
+          lineHeight: '24px',
+          backgroundColor: '#DB0011',
           borderRadius: '0px',
-          color: 'white',
+          textTransform:'none',
           '&:hover': {
             backgroundColor: '#fff',
             color: '#3c52b2',
@@ -239,5 +238,5 @@ export default function PhysicalSchemaDailog(props) {
 PhysicalSchemaDailog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  value: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
 };

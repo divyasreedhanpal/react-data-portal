@@ -13,9 +13,67 @@ const SchemaCardWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
-    columnGap: 20,
+    columnGap: 16,
     rowGap: 32,
 }));
+
+const physicalSchemaData = [
+    {
+        id: 1,
+        schemaName: "application-ratings1",
+        type: "WholeSale",
+        variables: 
+        [
+            { id : 1, name: "var1", type: 'VM', date: 'MMDDYYYY'},
+            { id : 2, name: "var2", type: 'VM', date: 'MMDDYYYY'},
+            { id : 3, name: "var3", type: 'VM', date: 'MMDDYYYY'},
+            { id : 4, name: "var4", type: 'VM', date: 'MMDDYYYY'},
+            { id : 5, name: "var5", type: 'VM', date: 'MMDDYYYY'},
+            { id : 6, name: "var6", type: 'VM', date: 'MMDDYYYY'},
+            { id : 7, name: "var7", type: 'VM', date: 'MMDDYYYY'},
+            { id : 8, name: "var8", type: 'VM', date: 'MMDDYYYY'},
+            { id : 9, name: "var9", type: 'VM', date: 'MMDDYYYY'},
+            { id : 10, name: "var10", type: 'VM', date: 'MMDDYYYY'},
+        ]
+    },
+    {
+        id: 2,
+        schemaName: "application-ratings2",
+        type: "WholeSale",
+        variables: 
+        [
+            { id : 1, name: "var1", type: 'VM', date: 'MMDDYYYY'},
+            { id : 2, name: "var2", type: 'VM', date: 'MMDDYYYY'},
+            { id : 3, name: "var3", type: 'VM', date: 'MMDDYYYY'},
+            { id : 4, name: "var4", type: 'VM', date: 'MMDDYYYY'},
+            { id : 5, name: "var5", type: 'VM', date: 'MMDDYYYY'},
+            { id : 6, name: "var6", type: 'VM', date: 'MMDDYYYY'},
+            { id : 7, name: "var7", type: 'VM', date: 'MMDDYYYY'},
+            { id : 8, name: "var8", type: 'VM', date: 'MMDDYYYY'},
+            { id : 9, name: "var9", type: 'VM', date: 'MMDDYYYY'},
+            { id : 10, name: "var10", type: 'VM', date: 'MMDDYYYY'},
+        ]
+    },
+    {
+        id: 3,
+        schemaName: "application-ratings3",
+        type: "WholeSale",
+        variables: 
+        [
+            { id : 1, name: "var1", type: 'VM', date: 'MMDDYYYY'},
+            { id : 2, name: "var2", type: 'VM', date: 'MMDDYYYY'},
+            { id : 3, name: "var3", type: 'VM', date: 'MMDDYYYY'},
+            { id : 4, name: "var4", type: 'VM', date: 'MMDDYYYY'},
+            { id : 5, name: "var5", type: 'VM', date: 'MMDDYYYY'},
+            { id : 6, name: "var6", type: 'VM', date: 'MMDDYYYY'},
+            { id : 7, name: "var7", type: 'VM', date: 'MMDDYYYY'},
+            { id : 8, name: "var8", type: 'VM', date: 'MMDDYYYY'},
+            { id : 9, name: "var9", type: 'VM', date: 'MMDDYYYY'},
+            { id : 10, name: "var10", type: 'VM', date: 'MMDDYYYY'},
+        ]
+    }
+
+];
 
 
 export default function PhysicalSchema() {
@@ -76,11 +134,16 @@ export default function PhysicalSchema() {
                 </Grid>
                 <Grid item xs={12} lg={12} md={12}>
                     <SchemaCardWrapper>
+                        {physicalSchemaData.map(
+                            e =>
+                                <PhysicalSchemaCard data={e}></PhysicalSchemaCard>
+                        )}
+
+                        {/* <PhysicalSchemaCard></PhysicalSchemaCard>
                         <PhysicalSchemaCard></PhysicalSchemaCard>
                         <PhysicalSchemaCard></PhysicalSchemaCard>
                         <PhysicalSchemaCard></PhysicalSchemaCard>
-                        <PhysicalSchemaCard></PhysicalSchemaCard>
-                        <PhysicalSchemaCard></PhysicalSchemaCard>
+                        <PhysicalSchemaCard></PhysicalSchemaCard> */}
                     </SchemaCardWrapper>
                 </Grid>
             </Grid>

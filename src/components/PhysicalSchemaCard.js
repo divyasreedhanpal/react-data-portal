@@ -6,21 +6,24 @@ import { Box } from '@mui/material';
 import PhysicalSchemaDailog from './PhysicalSchemaDailog';
 import styled from '@emotion/styled';
 
-export default function PhysicalSchemaCard() {
+export default function PhysicalSchemaCard(props) {
+
+  const { data } = props;
 
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('Dione');
+  // const [value, setValue] = React.useState('Dione');
 
   const handleClickListItem = () => {
     setOpen(true);
+    // setValue()
   };
 
   const handleClose = (newValue) => {
     setOpen(false);
 
-    if (newValue) {
-      setValue(newValue);
-    }
+    // if (newValue) {
+    //   setValue(newValue);
+    // }
   };
 
   const CardFontWrapper = styled('p')(({ theme }) => ({
@@ -74,7 +77,7 @@ export default function PhysicalSchemaCard() {
         keepMounted
         open={open}
         onClose={handleClose}
-        value={value}
+        data={data}
       />
       <Card sx={{ display: 'flex', width: '32%', overflow: 'unset', borderRadius: '4px', background: '#FCFCFC' }} onClick={handleClickListItem}>
         <Box sx={{ display: 'inline-flex', flexDirection: 'row',padding:'4px 4px 24px 4px' }}>
@@ -84,7 +87,7 @@ export default function PhysicalSchemaCard() {
           <Box sx={{
             flexGrow: 1
           }}>
-            <CardTitleFontWrapper><b>application-ratings</b></CardTitleFontWrapper>
+            <CardTitleFontWrapper><b>{data.schemaName}</b></CardTitleFontWrapper>
             <Box sx={{
               display: 'inline-flex',
               flexWrap: 'wrap',
@@ -92,7 +95,7 @@ export default function PhysicalSchemaCard() {
             }}>
               <ContentWrapper>
                 <img src={wholesaleImg} alt="dashboard"></img>
-                <CardFontWrapper>WholeSale</CardFontWrapper>
+                <CardFontWrapper>{data.type}</CardFontWrapper>
               </ContentWrapper>
               <ContentWrapper>
                 <img src={wholesaleImg} alt="dashboard"></img>
@@ -116,50 +119,7 @@ export default function PhysicalSchemaCard() {
               </FontButtontWrapper>
             </Box>
           </Box>
-
         </Box>
-        {/* <Grid container sx={{width:'302px'}}>
-          <Grid item xs={3} lg={3} md={3}>
-            <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
-          </Grid>]
-          <Grid item xs={9} lg={9} md={9}>
-            <Grid container spacing={1}>
-              <Grid item xs={12} lg={12} md={12}>
-                <CardTitleFontWrapper>application-ratings</CardTitleFontWrapper>
-              </Grid>
-              <Grid item xs={6} lg={6} md={6}>
-                <ContentWrapper>
-                  <img src={wholesaleImg} className="" alt="dashboard"></img>
-                  <CardFontWrapper>WholeSale</CardFontWrapper>
-                </ContentWrapper>
-
-              </Grid>
-              <Grid item xs={6} lg={6} md={6}>
-                <ContentWrapper>
-                  <img src={wholesaleImg} className="" alt="dashboard"></img>
-                  <CardFontWrapper>Data-visualisation</CardFontWrapper>
-                </ContentWrapper>
-              </Grid>
-              <Grid item xs={12} lg={12} md={12}>
-                <ContentWrapper>
-                  <img src={wholesaleImg} className="" alt="dashboard"></img>
-                  <CardFontWrapper>HDP | gid_gsid_0122</CardFontWrapper>
-                </ContentWrapper>
-              </Grid>
-              <Grid item xs={6} lg={6} md={6}>
-                <FontButtontWrapper>
-                  PII
-                </FontButtontWrapper>
-
-              </Grid>
-              <Grid item xs={6} lg={6} md={6}>
-                <FontButtontWrapper>
-                  SourceSystem
-                </FontButtontWrapper>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid> */}
       </Card>
     </>
   );

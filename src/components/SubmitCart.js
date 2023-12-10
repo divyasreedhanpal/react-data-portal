@@ -7,53 +7,71 @@ import DialogActions from '@mui/material/DialogActions';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
-import { Box, Divider, IconButton, Typography, Checkbox, FormControlLabel } from '@mui/material';
+import { Box, Divider, IconButton, Typography, Checkbox, FormControlLabel, Grid } from '@mui/material';
 import "./PhysicalSchemaDialog.css";
 import activeIcon from '../assets/Active.png';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+import "./PhysicalSchemaDialog.css"
 import CartItem from './CartItem';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import schemaImg from '../assets/SchemaImg.png';
+import catalogIcon from '../assets/Catalog.png';
+import dateFormat from '../assets/DateFormat.png';
+import signImg from '../assets/signImg.png';
+import PhysicalSchemaTable from './PhysicalSchemaTable';
+import { addCart } from '../reducers/cartReducer';
 
-const options = [
-    'None',
-    'Atria',
-    'Callisto',
-    'Dione',
-    'Ganymede',
-    'Hangouts Call',
-    'Luna',
-    'Oberon',
-    'Phobos',
-    'Pyxis',
-    'Sedna',
-    'Titania',
-    'Triton',
-    'Umbriel',
-];
 
 export default function SubmitCart(props) {
     const { onClose, value: valueProp, open, ...other } = props;
     const [value, setValue] = React.useState(valueProp);
-    const radioGroupRef = React.useRef(null);
     const [show, setShow] = React.useState(false);
+    const dispatch = useDispatch();
 
+    const [data, setData] = React.useState({});
     const [testValue, setTestValue] = React.useState('');
     const [testValue1, setTestValue1] = React.useState('');
 
+    const [detailsShow, setDetailsShow] = React.useState(false);
+
+    const cartItems = useSelector(state => state.cartItems.cartItems);
+
+    const selected = useSelector(state => state.cartItems.cartItems);
+
     React.useEffect(() => {
+        setShow(false);
+        setDetailsShow(false);
+        setData({});
         if (!open) {
             setValue(valueProp);
         }
     }, [valueProp, open]);
 
+    const isSelected = (id) => selected.indexOf(id).isSelected;
+
+    const setAllSelected = (rows) => {
+        // setSelected(rows)
+    }
+
     const handleEntering = () => {
-        // if (radioGroupRef.current != null) {
-        //   radioGroupRef.current.focus();
-        // }
     };
+
+    const handleClick = (data) => {
+        console.log("cart item clicked");
+        setShow(true);
+        setDetailsShow(true);
+        setData(data);
+    };
+
+    const handleAddCart = () => {
+        const newData = {...data, selected : selected, isSelected : true};
+        dispatch(addCart(newData));
+        handleBack();
+      };
 
     const handleSelectAllClick = (event) => {
         // if (event.target.checked) {
@@ -76,8 +94,9 @@ export default function SubmitCart(props) {
         setShow(true);
     };
 
-    const handleBack = (event) => {
+    const handleBack = () => {
         setShow(false);
+        setDetailsShow(false);
     };
 
 
@@ -119,20 +138,119 @@ export default function SubmitCart(props) {
                 </IconButton>
             </Box>
             {show ? <DialogContent sx={styleObj}>
-                <Box sx={
-                    {
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        padding: '10px'
-                    }
-                }>
-                    <DialogTitle>
+                {detailsShow ?
+                    (<Box sx={
+                        {
+                            display: 'flex',
+                            justifyContent: 'flex-start',
+                            padding: '10px'
+                        }
+                    }>
                         <Typography onClick={handleBack} component="span"><u>Back</u></Typography>
-                    </DialogTitle>
-                </Box>
+
+                        <DialogTitle>
+                            <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
+                            <Typography>{data.schemaName}</Typography>
+                            {/* <Typography>{detailsShow.toString()}</Typography> */}
+                        </DialogTitle>
+                    </Box>) :
+                    (<Box sx={
+                        {
+                            display: 'flex',
+                            justifyContent: 'flex-start',
+                            padding: '10px'
+                        }
+                    }>
+                        <DialogTitle>
+                            <Typography onClick={handleBack} component="span"><u>Back</u></Typography>
+                        </DialogTitle>
+                    </Box>)
+                }
 
                 <Divider></Divider>
-                <Box sx={
+                {detailsShow ? <>
+                    <Grid container columnGap={1}
+                        direction='row'
+                        sx={{
+                            borderRadius: 2,
+                            width: '100%',
+                            margin: '0px',
+                        }}>
+                        <Grid item xs={3} lg={3} md={3} sx={
+                            {
+                                backgroundColor: '#ffffffb5',
+                                borderRadius: 1,
+                                margin: '10px 0px 0px 0px',
+                                padding: '25px'
+                            }
+                        }>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-around'
+                            }}><img src={catalogIcon} className="" alt="dashboard"></img><Typography className='font'>{data.type} </Typography></div>
+
+                            <small style={{
+                                marginLeft: '20px'
+                            }}>wrrrr </small>
+                        </Grid>
+                        <Grid item xs={3} lg={3} md={3} sx={
+                            {
+                                backgroundColor: '#ffffffb5',
+                                borderRadius: 1,
+                                margin: '10px 0px 0px 0px',
+                                padding: '25px'
+                            }
+                        }>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-around'
+                            }}><img src={schemaImg} className="" alt="dashboard"></img> <Typography className='font'>application ratings </Typography></div>
+
+                            <small style={{
+                                marginLeft: '20px'
+                            }}>wrrrr </small>
+                        </Grid>
+                        <Grid item xs={3} lg={3} md={3} sx={
+                            {
+                                backgroundColor: '#ffffffb5',
+                                borderRadius: 1,
+                                margin: '10px 0px 0px 0px',
+                                padding: '25px'
+                            }
+                        }>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-around'
+                            }}><img src={dateFormat} className="" alt="dashboard"></img>  <Typography className='font'>application ratings </Typography></div>
+
+                            <small style={{
+                                marginLeft: '20px'
+                            }}>wrrrr </small>
+                        </Grid>
+                        <Grid item xs={3} lg={2.5} md={3} sx={
+                            {
+                                backgroundColor: '#ffffffb5',
+                                borderRadius: 1,
+                                margin: '10px 0px 0px 0px',
+                                padding: '25px'
+                            }
+                        }>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-around'
+                            }}><img src={signImg} className="" alt="dashboard"></img><Typography className='font'>application ratings </Typography></div>
+
+                            <small style={{
+                                marginLeft: '10px'
+                            }}>wrrrr </small>
+                        </Grid>
+                    </Grid>
+                    <PhysicalSchemaTable variables={data.variables} setAllSelected={setAllSelected} selected={[]} setValue={setValue} />
+                </> : <Box sx={
                     {
                         display: 'flex',
                         flexDirection: 'column',
@@ -169,6 +287,8 @@ export default function SubmitCart(props) {
                         <TextField id="outlined-basic" label="Input text" variant="outlined" multiline rows={10} />
                     </Box>
                 </Box>
+                }
+
             </DialogContent>
                 : <DialogContent sx={styleObj}>
                     <Box sx={
@@ -180,7 +300,7 @@ export default function SubmitCart(props) {
                     }>
                         <img src={activeIcon} className="imgCss1" alt="dashboard"></img>
                         <DialogTitle>
-                            <Typography>selected {options.size} tables in basket </Typography>
+                            <Typography>selected {cartItems.length} tables in basket </Typography>
                         </DialogTitle>
                     </Box>
 
@@ -261,17 +381,40 @@ export default function SubmitCart(props) {
                             borderRadius: '4px',
                         }
                     }}>
-
-                        <CartItem />
-                        <CartItem />
-                        <CartItem />
-                        <CartItem />
-                        <CartItem />
-                        <CartItem />
+                        {
+                            cartItems.map(item => {
+                            return <div onClick={() => handleClick(item)}><CartItem data={item} isItemSelected={isSelected} /> </div>}
+                            )
+                        }
                     </Box>
 
                 </DialogContent>}
-            {show ? <DialogActions sx={{
+            {show ? detailsShow ? 
+                  <DialogActions sx={{
+                    justifyContent: 'space-between',
+                    padding: '10px 30px 24px 40px',
+                    backgroundColor: '#8080802e'
+                  }}>
+                    <FormControlLabel control={<Checkbox color="primary"
+                      // indeterminate={numSelected > 0 && numSelected < rowCount}
+                      checked={value}
+                      checkedIcon={<CheckBoxOutlinedIcon />}
+                    //   onChange={handleSelectAllClick}
+                      inputProps={{
+                        'aria-label': 'Select all',
+                      }} />} label="Select All">
+                    </FormControlLabel>
+                    <Button onClick={handleAddCart} sx={{
+                      backgroundColor: 'red',
+                      borderRadius: '0px',
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: '#fff',
+                        color: '#3c52b2',
+                      },
+                    }}>Add to cart</Button>
+                  </DialogActions>
+            : <DialogActions sx={{
                 justifyContent: 'flex-end',
                 padding: '10px 30px 24px 40px',
                 backgroundColor: '#8080802e'
