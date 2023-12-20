@@ -7,7 +7,7 @@ import SubHeader from "../components/SubHeader";
 import PhysicalSchemaCard from "../components/PhysicalSchemaCard";
 import FilterTab from "../components/FilterTab";
 import styled from '@emotion/styled';
-import React from "react";
+import React, { useState } from "react";
 
 const SchemaCardWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -22,55 +22,55 @@ const physicalSchemaData = [
         id: 1,
         schemaName: "application-ratings1",
         type: "WholeSale",
-        variables: 
-        [
-            { id : 1, name: "var1", type: 'VM', date: 'MMDDYYYY'},
-            { id : 2, name: "var2", type: 'VM', date: 'MMDDYYYY'},
-            { id : 3, name: "var3", type: 'VM', date: 'MMDDYYYY'},
-            { id : 4, name: "var4", type: 'VM', date: 'MMDDYYYY'},
-            { id : 5, name: "var5", type: 'VM', date: 'MMDDYYYY'},
-            { id : 6, name: "var6", type: 'VM', date: 'MMDDYYYY'},
-            { id : 7, name: "var7", type: 'VM', date: 'MMDDYYYY'},
-            { id : 8, name: "var8", type: 'VM', date: 'MMDDYYYY'},
-            { id : 9, name: "var9", type: 'VM', date: 'MMDDYYYY'},
-            { id : 10, name: "var10", type: 'VM', date: 'MMDDYYYY'},
-        ]
+        variables:
+            [
+                { id: 1, name: "aml_id", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 2, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 3, name: "var3", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 4, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 5, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 6, name: "simplified_group_country_codes_data_asset_vw", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 7, name: "var7", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 8, name: "simplified_group_country_codes_data_asset_vw", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 9, name: "var9", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 10, name: "simplified_group_country_codes_data_asset_vw", type: 'varchar', date: 'MMDDYYYY' },
+            ]
     },
     {
         id: 2,
-        schemaName: "application-ratings2",
+        schemaName: "application-ratings2_ddddddddddddddddddddddddddddddd_ddddddddddd",
         type: "WholeSale",
-        variables: 
-        [
-            { id : 1, name: "var1", type: 'VM', date: 'MMDDYYYY'},
-            { id : 2, name: "var2", type: 'VM', date: 'MMDDYYYY'},
-            { id : 3, name: "var3", type: 'VM', date: 'MMDDYYYY'},
-            { id : 4, name: "var4", type: 'VM', date: 'MMDDYYYY'},
-            { id : 5, name: "var5", type: 'VM', date: 'MMDDYYYY'},
-            { id : 6, name: "var6", type: 'VM', date: 'MMDDYYYY'},
-            { id : 7, name: "var7", type: 'VM', date: 'MMDDYYYY'},
-            { id : 8, name: "var8", type: 'VM', date: 'MMDDYYYY'},
-            { id : 9, name: "var9", type: 'VM', date: 'MMDDYYYY'},
-            { id : 10, name: "var10", type: 'VM', date: 'MMDDYYYY'},
-        ]
+        variables:
+            [
+                { id: 1, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 2, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 3, name: "aml_id", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 4, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 5, name: "var5", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 6, name: "aml_id", type: 'VM', date: 'MMDDYYYY' },
+                { id: 7, name: "simplified_group_country_codes_data_asset_vw", type: 'VM', date: 'MMDDYYYY' },
+                { id: 8, name: "var8", type: 'VM', date: 'MMDDYYYY' },
+                { id: 9, name: "simplified_group_country_codes_data_asset_vw", type: 'VM', date: 'MMDDYYYY' },
+                { id: 10, name: "var10", type: 'VM', date: 'MMDDYYYY' },
+            ]
     },
     {
         id: 3,
-        schemaName: "application-ratings3",
+        schemaName: "simplified_group_country_codes_data_asset_vw",
         type: "WholeSale",
-        variables: 
-        [
-            { id : 1, name: "var1", type: 'VM', date: 'MMDDYYYY'},
-            { id : 2, name: "var2", type: 'VM', date: 'MMDDYYYY'},
-            { id : 3, name: "var3", type: 'VM', date: 'MMDDYYYY'},
-            { id : 4, name: "var4", type: 'VM', date: 'MMDDYYYY'},
-            { id : 5, name: "var5", type: 'VM', date: 'MMDDYYYY'},
-            { id : 6, name: "var6", type: 'VM', date: 'MMDDYYYY'},
-            { id : 7, name: "var7", type: 'VM', date: 'MMDDYYYY'},
-            { id : 8, name: "var8", type: 'VM', date: 'MMDDYYYY'},
-            { id : 9, name: "var9", type: 'VM', date: 'MMDDYYYY'},
-            { id : 10, name: "var10", type: 'VM', date: 'MMDDYYYY'},
-        ]
+        variables:
+            [
+                { id: 1, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 2, name: "aml_id", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 3, name: "seq_num", type: 'v', date: 'MMDDYYYY' },
+                { id: 4, name: "aml_id", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 5, name: "seq_num", type: 'varchar', date: 'MMDDYYYY' },
+                { id: 6, name: "aml_id", type: 'VM', date: 'MMDDYYYY' },
+                { id: 7, name: "simplified_group_country_codes_data_asset_vw", type: 'VM', date: 'MMDDYYYY' },
+                { id: 8, name: "seq_num", type: 'VM', date: 'MMDDYYYY' },
+                { id: 9, name: "seq_num", type: 'VM', date: 'MMDDYYYY' },
+                { id: 10, name: "simplified_group_country_codes_data_asset_vw", type: 'VM', date: 'MMDDYYYY' },
+            ]
     }
 
 ];
@@ -78,11 +78,23 @@ const physicalSchemaData = [
 
 export default function PhysicalSchema() {
     const tabsData = ["Dashboard", "Add new UseCase"];
+
+    const [searchValue, setSearchValue] = useState('');
+
+    const filterCards = physicalSchemaData.filter(card => {
+        // return card.schemaName.toLowerCase().includes(searchValue.toLowerCase()) !== false;
+        const condition1 = card.variables.filter(e => e.name.toLowerCase().includes(searchValue.toLowerCase()) !== false);
+        console.log(condition1);
+        const condition2 = card.schemaName.toLowerCase().includes(searchValue.toLowerCase()) !== false;
+        console.log(condition2);
+        return condition1.length > 0 || condition2;
+    })
+
     return (
         <React.Fragment>
             <SubHeader></SubHeader>
             <Grid container rowGap={2} sx={{
-                padding: '0 80px', marginTop: '32px', marginLeft: '0px', width: '100%'
+                padding: '0 80px', marginTop: '32px', marginLeft: '0px', width: '100%', marginBottom: '16px'
             }}>
                 <Grid item xs={12} lg={12} md={12} sx={{
                     backgroundColor: '#F3F3F3',
@@ -125,7 +137,7 @@ export default function PhysicalSchema() {
                 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} lg={6} md={6}>
-                            <SearchBar></SearchBar>
+                            <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}></SearchBar>
                         </Grid>
                         <Grid item xs={12} lg={6} md={6}>
                             <FilterTab></FilterTab>
@@ -133,18 +145,16 @@ export default function PhysicalSchema() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} lg={12} md={12}>
-                    <SchemaCardWrapper>
-                        {physicalSchemaData.map(
+                    <Grid container columnGap={2} rowGap={4}>
+                        {/* <SchemaCardWrapper> */}
+                        {filterCards.map(
                             e =>
-                                <PhysicalSchemaCard data={e}></PhysicalSchemaCard>
+                                <Grid item xs>
+                                    <PhysicalSchemaCard data={e}></PhysicalSchemaCard>
+                                </Grid>
                         )}
-
-                        {/* <PhysicalSchemaCard></PhysicalSchemaCard>
-                        <PhysicalSchemaCard></PhysicalSchemaCard>
-                        <PhysicalSchemaCard></PhysicalSchemaCard>
-                        <PhysicalSchemaCard></PhysicalSchemaCard>
-                        <PhysicalSchemaCard></PhysicalSchemaCard> */}
-                    </SchemaCardWrapper>
+                        {/* </SchemaCardWrapper> */}
+                    </Grid>
                 </Grid>
             </Grid>
         </React.Fragment>

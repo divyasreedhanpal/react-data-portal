@@ -8,7 +8,7 @@ const Search = styled('div')(({ theme }) => ({
     backgroundColor: '#ffffffb5',
     display: "flex",
     alignItems: "center",
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     '&:hover': {
         backgroundColor: '#ffffffb5',
     },
@@ -27,35 +27,50 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
+    cursor:'pointer',
     justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
+    width: '100%',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(2)})`,
         transition: theme.transitions.create('width'),
-        width: '70%',
+        width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: '12ch',
+            width: '100%',
             '&:focus': {
-                width: '20ch',
+                width: '100%',
             },
         },
     },
 }));
 
-export default function SearchBar() {
+export default function SearchBar({ searchValue, setSearchValue }) {
+
+    const searchInputRef = React.useRef();
+
+    const handleSearch = (e) => {
+        setSearchValue(e.target.value);
+    }
+
+    const handleClick = (e) => {
+        searchInputRef.current.focus();
+    }
     return (
         <Search>
             <StyledInputBase
                 placeholder="Search…"
+                ref={searchInputRef}
                 inputProps={{ 'aria-label': 'search' }}
+                value={searchValue}
+                onChange={handleSearch}
             />
             <SearchIconWrapper>
-            <img src={searchImg} className="" alt="dashboard"></img>
+                <img src={searchImg} onClick={handleClick} alt="dashboard"></img>
             </SearchIconWrapper>
 
         </Search>

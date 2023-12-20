@@ -265,7 +265,7 @@ export default function PhysicalSchemaDailog(props) {
             <small>wrrrr test test test</small>
             <span className='copyIcon'>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <g clip-path="url(#clip0_182_66564)">
+              <g clipPath="url(#clip0_182_66564)">
                 <path d="M10.6666 0.666656H2.66659C1.93325 0.666656 1.33325 1.26666 1.33325 1.99999V11.3333H2.66659V1.99999H10.6666V0.666656ZM12.6666 3.33332H5.33325C4.59992 3.33332 3.99992 3.93332 3.99992 4.66666V14C3.99992 14.7333 4.59992 15.3333 5.33325 15.3333H12.6666C13.3999 15.3333 13.9999 14.7333 13.9999 14V4.66666C13.9999 3.93332 13.3999 3.33332 12.6666 3.33332ZM12.6666 14H5.33325V4.66666H12.6666V14Z" fill="#333333" />
               </g>
               <defs>

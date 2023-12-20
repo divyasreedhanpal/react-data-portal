@@ -159,7 +159,7 @@ export default function CartItemDetails(props) {
                     }} />} label="Select All">
                 </FormControlLabel>
                 <Button onClick={handleAddCart} sx={{
-                    backgroundColor: 'red',
+                    backgroundColor: '#DB0011',
                     borderRadius: '0px',
                     color: 'white',
                     '&:hover': {

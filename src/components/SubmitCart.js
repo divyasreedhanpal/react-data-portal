@@ -46,12 +46,12 @@ export default function SubmitCart(props) {
     React.useEffect(() => {
         const selectedData = cartItems.filter(e => e.id === data.id);
         if (selectedData.length !== 0) {
-          setSelected(selectedData[0].selected);
-          if (selectedData[0].selected.length === data.variables.length) {
-            setValue(true);
-          } else {
-            setValue(false);
-          }
+            setSelected(selectedData[0].selected);
+            if (selectedData[0].selected.length === data.variables.length) {
+                setValue(true);
+            } else {
+                setValue(false);
+            }
         }
         setShow(false);
         setDetailsShow(false);
@@ -67,7 +67,7 @@ export default function SubmitCart(props) {
     };
 
     const handleClick = (data) => {
-        const currentItem =  cartItems.find(e => e.id === data.id);
+        const currentItem = cartItems.find(e => e.id === data.id);
         console.log(currentItem);
         setShow(true);
         setDetailsShow(true);
@@ -77,18 +77,18 @@ export default function SubmitCart(props) {
 
     const handleAddCart = () => {
         console.log(selected);
-        const newData = {...data, selected : selected, isSelected : true};
-        setData({...data, selected: selected});
+        const newData = { ...data, selected: selected, isSelected: true };
+        setData({ ...data, selected: selected });
         dispatch(addCart(newData));
         handleBack();
-      };
+    };
 
     const handleSelectAllClick = (event) => {
         setValue(event.target.checked);
         if (event.target.checked) {
-          const newSelected = data.variables.map((n) => n.id);
-          setSelected(newSelected);
-          return;
+            const newSelected = data.variables.map((n) => n.id);
+            setSelected(newSelected);
+            return;
         }
         setSelected([]);
     };
@@ -125,7 +125,7 @@ export default function SubmitCart(props) {
     };
 
     const styleObj = {
-        padding: '10px 30px 24px 40px', backgroundColor: '#F3F3F3',
+        padding: '0px 30px 24px 40px', backgroundColor: '#F3F3F3',
     };
 
     const disablediv = {
@@ -134,13 +134,13 @@ export default function SubmitCart(props) {
 
     return (
         <Dialog
-        sx={{
-            '& .MuiDialog-paper': {
-              width: '100%', margin: '80px', borderRadius: '6px 6px 0px 0px',
-              background: '#F3F3F3',
-              boxShadow: '0px 6px 20px 0px rgba(0, 0, 0, 0.10)'
-            }, backgroundColor: '#F3F3F3'
-          }}
+            sx={{
+                '& .MuiDialog-paper': {
+                    width: '100%', margin: '80px', borderRadius: '6px 6px 0px 0px',
+                    background: '#F3F3F3',
+                    boxShadow: '0px 6px 20px 0px rgba(0, 0, 0, 0.10)'
+                }, backgroundColor: '#F3F3F3'
+            }}
             maxWidth="lg"
             TransitionProps={{ onEntering: handleEntering }}
             open={open}
@@ -160,7 +160,7 @@ export default function SubmitCart(props) {
                     onClick={handleCancel}
                     aria-label="close"
                 >
-                     <img src={closeImage} alt="dashboard"></img>
+                    <img src={closeImage} alt="dashboard"></img>
                 </IconButton>
             </Box>
             {show ? <DialogContent sx={styleObj}>
@@ -168,8 +168,7 @@ export default function SubmitCart(props) {
                     (<Box sx={
                         {
                             display: 'flex',
-                            justifyContent: 'flex-start',
-                            padding: '10px'
+                            justifyContent: 'flex-start'
                         }
                     }>
                         <Typography onClick={handleBack} component="span"><u>Back</u></Typography>
@@ -183,10 +182,10 @@ export default function SubmitCart(props) {
                     (<Box sx={
                         {
                             display: 'flex',
-                            justifyContent: 'flex-start',
-                            padding: '10px'
+                            justifyContent: 'flex-start'
                         }
                     }>
+                       
                         <DialogTitle>
                             <Typography onClick={handleBack} component="span"><u>Back</u></Typography>
                         </DialogTitle>
@@ -202,80 +201,216 @@ export default function SubmitCart(props) {
                             width: '100%',
                             margin: '0px',
                         }}>
-                        <Grid item xs={3} lg={3} md={3} sx={
+                        <Grid item xs={3} sx={
                             {
-                                backgroundColor: '#ffffffb5',
-                                borderRadius: 1,
+                                backgroundColor: '#FCFCFC',
+                                borderRadius: '6px',
                                 margin: '10px 0px 0px 0px',
-                                padding: '25px'
+                                padding: '25px',
+                                height: '86px',
+                                border: '1px solid #D4D4D4'
                             }
                         }>
                             <div style={{
                                 display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-around'
-                            }}><img src={catalogIcon} className="" alt="dashboard"></img><Typography className='font'>{data.type} </Typography></div>
+                                flexDirection: 'row'
+                            }}><img src={catalogIcon} className='mr16' alt="dashboard"></img><popupcontentwrapper>{data.type} </popupcontentwrapper></div>
 
-                            <small style={{
-                                marginLeft: '20px'
-                            }}>wrrrr </small>
+                            <small>wrrrr </small>
                         </Grid>
-                        <Grid item xs={3} lg={3} md={3} sx={
+                        <Grid item xs sx={
                             {
-                                backgroundColor: '#ffffffb5',
-                                borderRadius: 1,
+                                backgroundColor: '#FCFCFC',
+                                borderRadius: '6px',
                                 margin: '10px 0px 0px 0px',
-                                padding: '25px'
+                                padding: '25px',
+                                height: '86px',
+                                border: '1px solid #D4D4D4'
                             }
                         }>
                             <div style={{
                                 display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-around'
-                            }}><img src={schemaImg} className="" alt="dashboard"></img> <Typography className='font'>application ratings </Typography></div>
+                                flexDirection: 'row'
+                            }}><img src={schemaImg} className="mr16" alt="dashboard"></img> <popupcontentwrapper>{data.type} </popupcontentwrapper></div>
 
-                            <small style={{
-                                marginLeft: '20px'
-                            }}>wrrrr </small>
+                            <small >wrrrr </small>
                         </Grid>
-                        <Grid item xs={3} lg={3} md={3} sx={
+                        <Grid item xs sx={
                             {
-                                backgroundColor: '#ffffffb5',
-                                borderRadius: 1,
+                                backgroundColor: '#FCFCFC',
+                                borderRadius: '6px',
                                 margin: '10px 0px 0px 0px',
-                                padding: '25px'
+                                padding: '25px',
+                                height: '86px',
+                                border: '1px solid #D4D4D4'
                             }
                         }>
                             <div style={{
                                 display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-around'
-                            }}><img src={dateFormat} className="" alt="dashboard"></img>  <Typography className='font'>application ratings </Typography></div>
+                                flexDirection: 'row'
+                            }}><img src={schemaImg} className="mr16" alt="dashboard"></img> <popupcontentwrapper>application ratings </popupcontentwrapper></div>
 
-                            <small style={{
-                                marginLeft: '20px'
-                            }}>wrrrr </small>
+                            <small>wrrrr </small>
                         </Grid>
-                        <Grid item xs={3} lg={2.5} md={3} sx={
+                        <Grid item xs sx={
                             {
-                                backgroundColor: '#ffffffb5',
-                                borderRadius: 1,
+                                backgroundColor: '#FCFCFC',
+                                borderRadius: '6px',
                                 margin: '10px 0px 0px 0px',
-                                padding: '25px'
+                                padding: '25px',
+                                height: '86px',
+                                border: '1px solid #D4D4D4'
                             }
                         }>
                             <div style={{
                                 display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-around'
-                            }}><img src={signImg} className="" alt="dashboard"></img><Typography className='font'>application ratings </Typography></div>
+                                flexDirection: 'row'
+                            }}><img src={dateFormat} className="mr16" alt="dashboard"></img>  <popupcontentwrapper>application ratings </popupcontentwrapper></div>
 
-                            <small style={{
-                                marginLeft: '10px'
-                            }}>wrrrr </small>
+                            <small >wrrrr </small>
                         </Grid>
                     </Grid>
-                    <PhysicalSchemaTable setAllSelected={setAllSelected} setValue={setValue} data={data} selected={selected} setSelected={setSelected}/>
+                    <Grid container columnGap={1}
+                        direction='row'
+                        sx={{
+                            borderRadius: 2,
+                            margin: '0px',
+                            flexGrow: 1,
+                        }}>
+                        <Grid item xs={6} lg={6} md={6} sx={
+                            {
+                                backgroundColor: '#FCFCFC',
+                                borderRadius: '6px',
+                                margin: '10px 0px 0px 0px',
+                                padding: '25px',
+                                height: '86px',
+                                border: '1px solid #D4D4D4'
+                            }
+                        }>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}><img src={catalogIcon} alt="dashboard" className='mr16'></img><popupcontentwrapper>{data.type} </popupcontentwrapper></div>
+
+                            <small>wrrrr </small>
+                        </Grid>
+                        <Grid item xs sx={
+                            {
+                                backgroundColor: '#FCFCFC',
+                                borderRadius: '6px',
+                                margin: '10px 0px 0px 0px',
+                                padding: '25px',
+                                height: '86px',
+                                border: '1px solid #D4D4D4'
+                            }
+                        }>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}><img src={schemaImg} className='mr16' alt="dashboard"></img> <popupcontentwrapper>application ratings </popupcontentwrapper></div>
+
+                            <small>wrrrr test test test</small>
+                            <span className='copyIcon'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <g clipPath="url(#clip0_182_66564)">
+                                        <path d="M10.6666 0.666656H2.66659C1.93325 0.666656 1.33325 1.26666 1.33325 1.99999V11.3333H2.66659V1.99999H10.6666V0.666656ZM12.6666 3.33332H5.33325C4.59992 3.33332 3.99992 3.93332 3.99992 4.66666V14C3.99992 14.7333 4.59992 15.3333 5.33325 15.3333H12.6666C13.3999 15.3333 13.9999 14.7333 13.9999 14V4.66666C13.9999 3.93332 13.3999 3.33332 12.6666 3.33332ZM12.6666 14H5.33325V4.66666H12.6666V14Z" fill="#333333" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_182_66564">
+                                            <rect width="16" height="16" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </span>
+                        </Grid>
+                    </Grid>
+                    <Box sx={
+                        {
+                            display: 'flex',
+                            flexDirection: 'row',
+                            columnGap: 2,
+                            paddingTop: 2,
+
+                        }
+                    }>
+                        <Box sx={{
+                            minWidth: 120, flexGrow: 1, display: 'flex',
+                            flexDirection: 'column', rowGap: 1
+                        }}>
+                            <Typography sx={{
+                                color: '#333',
+                                fontFamily: 'Univers Next for HSBC',
+                                fontSize: '16px',
+                                fontStyle: 'normal',
+                                fontWeight: '500',
+                                lineHeight: '24px'
+                            }}>Label1</Typography>
+                            <FormControl fullWidth>
+                                <InputLabel sx={{
+                                    color: '#333',
+                                    fontFamily: 'Univers Next for HSBC',
+                                    fontSize: '16px',
+                                    fontStyle: 'normal',
+                                    fontWeight: '500',
+                                    lineHeight: '24px'
+                                }} id="demo-simple-select-label">test</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={testValue}
+                                    label="test"
+                                    onChange={handleChange}
+                                    sx={{
+                                        backgroundColor: '#FCFCFC'
+                                    }}
+                                >
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <Box sx={{
+                            minWidth: 120, flexGrow: 1, display: 'flex',
+                            flexDirection: 'column', rowGap: 1
+                        }}>
+                            <Typography sx={{
+                                color: '#333',
+                                fontFamily: 'Univers Next for HSBC',
+                                fontSize: '16px',
+                                fontStyle: 'normal',
+                                fontWeight: '500',
+                                lineHeight: '24px'
+                            }}>Label2</Typography>
+                            <FormControl fullWidth>
+                                <InputLabel sx={{
+                                    color: '#333',
+                                    fontFamily: 'Univers Next for HSBC',
+                                    fontSize: '16px',
+                                    fontStyle: 'normal',
+                                    fontWeight: '500',
+                                    lineHeight: '24px'
+                                }}
+                                    id="demo-simple-select-label1">test1</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label1"
+                                    id="demo-simple-select1"
+                                    value={testValue1}
+                                    label="test1"
+                                    onChange={handleChange}
+                                    sx={{
+                                        backgroundColor: '#FCFCFC'
+                                    }}
+                                >
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </Box>
+                    
+                    <PhysicalSchemaTable setAllSelected={setAllSelected} setValue={setValue} data={data} selected={selected} setSelected={setSelected} />
                 </> : <Box sx={
                     {
                         display: 'flex',
@@ -283,40 +418,40 @@ export default function SubmitCart(props) {
                         rowGap: 2,
                         marginTop: 2,
                         padding: 2,
-                       
+
                     }
                 }>
                     <Typography sx={{
-                         color: '#333',
-                         fontFamily: 'Univers Next for HSBC',
-                         fontSize: '16px',
-                         fontStyle: 'normal',
-                         fontWeight: '400',
-                         lineHeight: '24px'
+                        color: '#333',
+                        fontFamily: 'Univers Next for HSBC',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        lineHeight: '24px'
                     }} > Dear user,</Typography>
                     <Typography sx={{
-                         color: '#333',
-                         fontFamily: 'Univers Next for HSBC',
-                         fontSize: '16px',
-                         fontStyle: 'normal',
-                         fontWeight: '400',
-                         lineHeight: '24px'
-                    }}>You are going to add those tables to use case 
-                    <b sx={{
-                         color: '#333',
-                         fontFamily: 'Univers Next for HSBC',
-                         fontSize: '16px',
-                         fontStyle: 'normal',
-                         fontWeight: '700',
-                         lineHeight: '24px'
-                    }}>AWB_DFDS.</b></Typography>
+                        color: '#333',
+                        fontFamily: 'Univers Next for HSBC',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        lineHeight: '24px'
+                    }}>You are going to add those tables to use case
+                        <b sx={{
+                            color: '#333',
+                            fontFamily: 'Univers Next for HSBC',
+                            fontSize: '16px',
+                            fontStyle: 'normal',
+                            fontWeight: '700',
+                            lineHeight: '24px'
+                        }}>AWB_DFDS.</b></Typography>
                     <Typography sx={{
-                         color: '#333',
-                         fontFamily: 'Univers Next for HSBC',
-                         fontSize: '16px',
-                         fontStyle: 'normal',
-                         fontWeight: '400',
-                         lineHeight: '24px'
+                        color: '#333',
+                        fontFamily: 'Univers Next for HSBC',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        lineHeight: '24px'
                     }}>Permissions will be granted after request approved. To proceed further, please provide the fallowing information.</Typography>
                     <Box sx={
                         {
@@ -334,15 +469,15 @@ export default function SubmitCart(props) {
                             lineHeight: '20px'
                         }}>Data Visa *</Typography>
                         <Typography sx={{
-                             color: '#333',
-                             fontFamily: 'Univers Next for HSBC',
-                             fontSize: '16px',
-                             fontStyle: 'normal',
-                             fontWeight: '400',
-                             lineHeight: '24px'
+                            color: '#333',
+                            fontFamily: 'Univers Next for HSBC',
+                            fontSize: '16px',
+                            fontStyle: 'normal',
+                            fontWeight: '400',
+                            lineHeight: '24px'
                         }}>Please provide the Data visa for data consumption.</Typography>
                         <TextField id="outlined-basic" label="Input text" variant="outlined" sx={{
-                            maxWidth: '50%',height:'48px'
+                            maxWidth: '50%', height: '48px'
                         }} />
                     </Box>
                     <Box sx={
@@ -361,14 +496,14 @@ export default function SubmitCart(props) {
                             lineHeight: '20px'
                         }}>Business Justification *</Typography>
                         <Typography sx={{
-                             color: '#333',
-                             fontFamily: 'Univers Next for HSBC',
-                             fontSize: '16px',
-                             fontStyle: 'normal',
-                             fontWeight: '400',
-                             lineHeight: '24px'
+                            color: '#333',
+                            fontFamily: 'Univers Next for HSBC',
+                            fontSize: '16px',
+                            fontStyle: 'normal',
+                            fontWeight: '400',
+                            lineHeight: '24px'
                         }}>Request will be rejected if no business justification</Typography>
-                        <TextField id="outlined-basic" label="Input text" variant="outlined" multiline rows={10} sx={{height:'273.5px'}} />
+                        <TextField id="outlined-basic" label="Input text" variant="outlined" multiline rows={10} sx={{ height: '273.5px' }} />
                     </Box>
                 </Box>
                 }
@@ -466,58 +601,65 @@ export default function SubmitCart(props) {
                     }}>
                         {
                             cartItems.map(item => {
-                            return <div onClick={() => handleClick(item)}><CartItem data={item} isItemSelected={isSelected} /> </div>}
+                                return <div onClick={() => handleClick(item)}><CartItem data={item} isItemSelected={isSelected} /> </div>
+                            }
                             )
                         }
                     </Box>
 
                 </DialogContent>}
-            {show ? detailsShow ? 
-                  <DialogActions sx={{
+            {show ? detailsShow ?
+                <DialogActions sx={{
                     justifyContent: 'space-between',
                     padding: '10px 30px 24px 40px',
-                    backgroundColor: '#8080802e'
-                  }}>
+                    backgroundColor: '#F3F3F3'
+                }}>
                     <FormControlLabel control={<Checkbox color="primary"
-                      // indeterminate={numSelected > 0 && numSelected < rowCount}
-                      checked={value}
-                      checkedIcon={<CheckBoxOutlinedIcon />}
-                      onChange={handleSelectAllClick}
-                      inputProps={{
-                        'aria-label': 'Select all',
-                      }} />} label="Select All">
+                        // indeterminate={numSelected > 0 && numSelected < rowCount}
+                        checked={value}
+                        checkedIcon={<CheckBoxOutlinedIcon />}
+                        onChange={handleSelectAllClick}
+                        inputProps={{
+                            'aria-label': 'Select all',
+                        }} />} label="Select All">
                     </FormControlLabel>
                     <Button onClick={handleAddCart} sx={{
-                      backgroundColor: 'red',
-                      borderRadius: '0px',
-                      color: 'white',
-                      '&:hover': {
-                        backgroundColor: '#fff',
-                        color: '#3c52b2',
-                      },
+                       color: '#FFF',
+                       fontFamily: 'Univers Next for HSBC',
+                       fontSize: '16px',
+                       fontStyle: 'normal',
+                       fontWeight: '400',
+                       lineHeight: '24px',
+                       backgroundColor: '#DB0011',
+                       borderRadius: '0px',
+                       textTransform: 'none',
+                       '&:hover': {
+                         backgroundColor: '#fff',
+                         color: '#3c52b2',
+                       },
                     }}>Add to cart</Button>
-                  </DialogActions>
-            : <DialogActions sx={{
-                justifyContent: 'flex-end',
-                padding: '10px 30px 24px 40px',
-                backgroundColor: '#F3F3F3'
-            }}>
-                <Button onClick={handleOk} sx={{
-                 color: '#FFF',
-                 fontFamily: 'Univers Next for HSBC',
-                 fontSize: '16px',
-                 fontStyle: 'normal',
-                 fontWeight: '400',
-                 lineHeight: '24px',
-                 backgroundColor: '#DB0011',
-                 borderRadius: '0px',
-                 textTransform:'none',
-                    '&:hover': {
-                        backgroundColor: '#fff',
-                        color: '#3c52b2',
-                    },
-                }}>Submit</Button>
-            </DialogActions> :
+                </DialogActions>
+                : <DialogActions sx={{
+                    justifyContent: 'flex-end',
+                    padding: '10px 30px 24px 40px',
+                    backgroundColor: '#F3F3F3'
+                }}>
+                    <Button onClick={handleOk} sx={{
+                        color: '#FFF',
+                        fontFamily: 'Univers Next for HSBC',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        lineHeight: '24px',
+                        backgroundColor: '#DB0011',
+                        borderRadius: '0px',
+                        textTransform: 'none',
+                        '&:hover': {
+                            backgroundColor: '#fff',
+                            color: '#3c52b2',
+                        },
+                    }}>Submit</Button>
+                </DialogActions> :
                 <DialogActions sx={{
                     justifyContent: 'space-between',
                     padding: '10px 30px 24px 40px',
@@ -541,7 +683,7 @@ export default function SubmitCart(props) {
                         lineHeight: '24px',
                         backgroundColor: '#DB0011',
                         borderRadius: '0px',
-                        textTransform:'none',
+                        textTransform: 'none',
                         '&:hover': {
                             backgroundColor: '#fff',
                             color: '#3c52b2',

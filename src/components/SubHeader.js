@@ -18,6 +18,7 @@ import activeIcon from '../assets/Active.png';
 import Divider from '@mui/material/Divider';
 import SubmitCart from './SubmitCart';
 import { useSelector } from 'react-redux';
+import { Badge, SvgIcon } from '@mui/material';
 
 const pages = ['Home -> Physical Schema'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -29,7 +30,7 @@ function SubHeader() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const cartItems = useSelector(state => state.cartItems.cartItems);
-  
+
 
   const handleOpenCartMenu = (event) => {
     setAnchorElCart(event.currentTarget);
@@ -173,16 +174,19 @@ function SubHeader() {
             <Tooltip title="Open cart items">
               <IconButton onClick={handleOpenCartMenu}>
                 <IconButton sx={{ paddingRight: '32px' }} onClick={handleOpenCartMenu}>
-                  <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path id="Icon colour" fill-rule="evenodd" clip-rule="evenodd" d="M20 17.3333H5.81467L6.892 14.6667H19.4187L24 3.33333H3.05867L1.71067 0H0V0.0346667L5.54133 13.7427L4.08933 17.3333H3.33333C2.22933 17.3333 1.33333 18.228 1.33333 19.3333C1.33333 20.4387 2.22933 21.3333 3.33333 21.3333C4.43733 21.3333 5.33333 20.4387 5.33333 19.3333C5.33333 19.196 5.32 19.0627 5.29333 18.9333H18.0413C18.0147 19.0627 18.0013 19.196 18.0013 19.3333C18.0013 20.4387 18.8973 21.3333 20.0013 21.3333C21.1053 21.3333 22.0013 20.4387 22.0013 19.3333C22.0013 18.228 21.104 17.3333 20 17.3333Z" fill="white" />
-                  </svg>
-
+                  <Badge badgeContent={cartItems.length} color='secondary'>
+                    <SvgIcon>
+                      <path id="Icon colour" fill-rule="evenodd" clip-rule="evenodd" d="M20 17.3333H5.81467L6.892 14.6667H19.4187L24 3.33333H3.05867L1.71067 0H0V0.0346667L5.54133 13.7427L4.08933 17.3333H3.33333C2.22933 17.3333 1.33333 18.228 1.33333 19.3333C1.33333 20.4387 2.22933 21.3333 3.33333 21.3333C4.43733 21.3333 5.33333 20.4387 5.33333 19.3333C5.33333 19.196 5.32 19.0627 5.29333 18.9333H18.0413C18.0147 19.0627 18.0013 19.196 18.0013 19.3333C18.0013 20.4387 18.8973 21.3333 20.0013 21.3333C21.1053 21.3333 22.0013 20.4387 22.0013 19.3333C22.0013 18.228 21.104 17.3333 20 17.3333Z" fill="white" />
+                    </SvgIcon>
+                  </Badge>
                 </IconButton>
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-cart"
+              anchorReference="anchorPosition"
+              anchorPosition={{ top: 16, left: 1440 }}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -195,7 +199,7 @@ function SubHeader() {
               open={Boolean(anchorElCart)}
               onClose={handleCloseCartMenu}
             >
-              <Box sx={{ padding : '0px 12px 16px 12px'}}>
+              <Box sx={{ padding: '0px 12px 16px 12px' }}>
                 <Box sx={{
                   display: 'flex',
                   flexDirection: 'row-reverse'
@@ -253,6 +257,8 @@ function SubHeader() {
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
+              anchorReference="anchorPosition"
+              anchorPosition={{ top: 16, left: 1440 }}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',

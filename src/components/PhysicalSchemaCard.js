@@ -44,7 +44,9 @@ export default function PhysicalSchemaCard(props) {
     color: ' #333',
     fontFamily: 'Univers Next for HSBC',
     fontStyle: 'normal',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
+    wordBreak: 'break-all',
+    margin: '0px',
     // letterSpacing: 1,
   }));
 
@@ -57,7 +59,7 @@ export default function PhysicalSchemaCard(props) {
   }));
 
   const FontButtontWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(1, 1, 1, 1),
+    padding: '8px 16px 8px 16px',
     color: '#333',
     fontFamily: 'Univers Next for HSBC',
     fontSize: '10px',
@@ -79,19 +81,24 @@ export default function PhysicalSchemaCard(props) {
         onClose={handleClose}
         data={data}
       />
-      <Card sx={{ display: 'flex', width: '32%', overflow: 'unset', borderRadius: '4px', background: '#FCFCFC' }} onClick={handleClickListItem}>
-        <Box sx={{ display: 'inline-flex', flexDirection: 'row',padding:'4px 4px 24px 4px' }}>
+      <Card sx={{ display: 'flex', overflow: 'unset', borderRadius: '4px', background: '#FCFCFC', cursor: 'pointer', height: '280px' }} onClick={handleClickListItem}>
+        <Box sx={{ display: 'inline-flex', flexDirection: 'row', padding: '4px 4px 24px 4px' }}>
           <Box sx={{
             padding: '20px',
           }}><img src={activeIcon} alt="dashboard"></img></Box>
           <Box sx={{
-            flexGrow: 1
+            flexGrow: 1,
+            padding: '24px 20px 20px 0px',
+            display: 'flex',
+            flexDirection: 'column',
+            rowGap: '16px',
           }}>
             <CardTitleFontWrapper><b>{data.schemaName}</b></CardTitleFontWrapper>
             <Box sx={{
               display: 'inline-flex',
               flexWrap: 'wrap',
-              gap: 1,
+              columnGap: '42px',
+              rowGap: '16px'
             }}>
               <ContentWrapper>
                 <img src={wholesaleImg} alt="dashboard"></img>
@@ -115,7 +122,7 @@ export default function PhysicalSchemaCard(props) {
                 PII
               </FontButtontWrapper>
               <FontButtontWrapper>
-                SourceSystem
+                Source System
               </FontButtontWrapper>
             </Box>
           </Box>
