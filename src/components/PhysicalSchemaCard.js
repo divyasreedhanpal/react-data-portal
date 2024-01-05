@@ -47,6 +47,7 @@ export default function PhysicalSchemaCard(props) {
     pointerEvents: 'none',
     wordBreak: 'break-all',
     margin: '0px',
+    height: '50px'
     // letterSpacing: 1,
   }));
 
@@ -98,7 +99,8 @@ export default function PhysicalSchemaCard(props) {
               display: 'inline-flex',
               flexWrap: 'wrap',
               columnGap: '42px',
-              rowGap: '16px'
+              rowGap: '16px',
+              flexGrow: 1,
             }}>
               <ContentWrapper>
                 <img src={wholesaleImg} alt="dashboard"></img>

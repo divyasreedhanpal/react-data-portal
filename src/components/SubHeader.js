@@ -30,7 +30,7 @@ function SubHeader() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const cartItems = useSelector(state => state.cartItems.cartItems);
-
+  
 
   const handleOpenCartMenu = (event) => {
     setAnchorElCart(event.currentTarget);
@@ -73,10 +73,10 @@ function SubHeader() {
         onClose={handleClose}
       // value={value}
       />
-      <Container maxWidth="xl">
+      <Container maxWidth="100%">
         <Toolbar disableGutters sx={{
-          width: '90%',
-          marginLeft: '4%',
+          paddingLeft: '80px',
+          paddingRight: '80px'
         }}>
           <svg width="50" height="24" viewBox="0 0 50 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Logo">
@@ -186,7 +186,7 @@ function SubHeader() {
               sx={{ mt: '45px' }}
               id="menu-cart"
               anchorReference="anchorPosition"
-              anchorPosition={{ top: 16, left: 1440 }}
+              anchorPosition={{ top: 16, left: window.innerWidth - 90}}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',

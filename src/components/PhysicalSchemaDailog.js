@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Checkbox, Divider, FormControl, FormControlLabel, Grid, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Checkbox, Divider, FormControl, FormControlLabel, Grid, IconButton, InputLabel, ListItemText, MenuItem, Radio, RadioGroup, Select, Typography } from '@mui/material';
 import PhysicalSchemaTable from './PhysicalSchemaTable';
 import schemaImg from '../assets/SchemaImg.png';
 import catalogIcon from '../assets/Catalog.png';
@@ -20,6 +20,7 @@ import "./PhysicalSchemaDialog.css"
 import styled from '@emotion/styled';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { addCart } from '../reducers/cartReducer';
+import Dropdown from './PhysicalSchemaDialog/Dropdown';
 
 
 const popuptitlewrapper = styled('h2')(({ theme }) => ({
@@ -39,12 +40,15 @@ const popupcontentwrapper = styled('p')(({ theme }) => ({
   lineHeight: '24px'
 }));
 
+const columns = [{ key: 'column1', label: 'Column 1' }, { key: 'column2', label: 'Column 2' }]
+const filters = [{ key: 'filter1', label: 'Filter 1' }, { key: 'filter2', label: 'Filter 2' }]
+
 export default function PhysicalSchemaDailog(props) {
   const { onClose, data, open, ...other } = props;
   const [value, setValue] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
-  const [testValue, setTestValue] = React.useState('');
-  const [testValue1, setTestValue1] = React.useState('');
+  const [judColumnValue, setJudColumnValue] = React.useState('column1');
+  const [judFilterValue, setjudFilterValue] = React.useState('filter1');
 
   const dispatch = useDispatch();
 
@@ -74,8 +78,12 @@ export default function PhysicalSchemaDailog(props) {
     onClose();
   };
 
-  const handleChange = (event) => {
-    setTestValue(event.target.value);
+  const handleChangeColumn = (event) => {
+    setJudColumnValue(event.target.value);
+  };
+
+  const handleChangeFilter = (event) => {
+    setjudFilterValue(event.target.value);
   };
 
   const setAllSelected = (rows) => {
@@ -264,16 +272,16 @@ export default function PhysicalSchemaDailog(props) {
 
             <small>wrrrr test test test</small>
             <span className='copyIcon'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <g clipPath="url(#clip0_182_66564)">
-                <path d="M10.6666 0.666656H2.66659C1.93325 0.666656 1.33325 1.26666 1.33325 1.99999V11.3333H2.66659V1.99999H10.6666V0.666656ZM12.6666 3.33332H5.33325C4.59992 3.33332 3.99992 3.93332 3.99992 4.66666V14C3.99992 14.7333 4.59992 15.3333 5.33325 15.3333H12.6666C13.3999 15.3333 13.9999 14.7333 13.9999 14V4.66666C13.9999 3.93332 13.3999 3.33332 12.6666 3.33332ZM12.6666 14H5.33325V4.66666H12.6666V14Z" fill="#333333" />
-              </g>
-              <defs>
-                <clipPath id="clip0_182_66564">
-                  <rect width="16" height="16" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <g clipPath="url(#clip0_182_66564)">
+                  <path d="M10.6666 0.666656H2.66659C1.93325 0.666656 1.33325 1.26666 1.33325 1.99999V11.3333H2.66659V1.99999H10.6666V0.666656ZM12.6666 3.33332H5.33325C4.59992 3.33332 3.99992 3.93332 3.99992 4.66666V14C3.99992 14.7333 4.59992 15.3333 5.33325 15.3333H12.6666C13.3999 15.3333 13.9999 14.7333 13.9999 14V4.66666C13.9999 3.93332 13.3999 3.33332 12.6666 3.33332ZM12.6666 14H5.33325V4.66666H12.6666V14Z" fill="#333333" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_182_66564">
+                    <rect width="16" height="16" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
             </span>
           </Grid>
         </Grid>
@@ -283,84 +291,27 @@ export default function PhysicalSchemaDailog(props) {
             flexDirection: 'row',
             columnGap: 2,
             paddingTop: 2,
-            
+
           }
         }>
-          <Box sx={{
-            minWidth: 120, flexGrow: 1, display: 'flex',
-            flexDirection: 'column', rowGap: 1
-          }}>
-             <Typography sx={{
-                 color: '#333',
-                 fontFamily: 'Univers Next for HSBC',
-                 fontSize: '16px',
-                 fontStyle: 'normal',
-                 fontWeight: '500',
-                 lineHeight: '24px'
-            }}>Label1</Typography>
-            <FormControl fullWidth>
-              <InputLabel sx={{
-                color: '#333',
-                fontFamily: 'Univers Next for HSBC',
-                fontSize: '16px',
-                fontStyle: 'normal',
-                fontWeight: '500',
-                lineHeight: '24px'
-              }} id="demo-simple-select-label">test</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={testValue}
-                label="test"
-                onChange={handleChange}
-                sx={{
-                  backgroundColor: '#FCFCFC'
-                }}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Box sx={{
-            minWidth: 120, flexGrow: 1, display: 'flex',
-            flexDirection: 'column', rowGap: 1
-          }}>
-            <Typography sx={{
-                 color: '#333',
-                 fontFamily: 'Univers Next for HSBC',
-                 fontSize: '16px',
-                 fontStyle: 'normal',
-                 fontWeight: '500',
-                 lineHeight: '24px'
-            }}>Label2</Typography>
-            <FormControl fullWidth>
-              <InputLabel sx={{
-                color: '#333',
-                fontFamily: 'Univers Next for HSBC',
-                fontSize: '16px',
-                fontStyle: 'normal',
-                fontWeight: '500',
-                lineHeight: '24px'
-              }}
-              id="demo-simple-select-label1">test1</InputLabel>
-              <Select
-                labelId="demo-simple-select-label1"
-                id="demo-simple-select1"
-                value={testValue1}
-                label="test1"
-                onChange={handleChange}
-                sx={{
-                  backgroundColor: '#FCFCFC'
-                }}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          <Dropdown columns={columns} label='Juridiction' judColumnValue={judColumnValue}
+            handleChange={handleChangeColumn}
+            filters={filters}
+            handleChangeFilter={handleChangeFilter}
+            judFilterValue={judFilterValue}
+          ></Dropdown>
+          <Dropdown columns={columns} label='Legal Entity' judColumnValue={judColumnValue}
+            handleChange={handleChangeColumn}
+            filters={filters}
+            handleChangeFilter={handleChangeFilter}
+            judFilterValue={judFilterValue}
+          ></Dropdown>
+          <Dropdown columns={columns} label='Line of Business' judColumnValue={judColumnValue}
+            handleChange={handleChangeColumn}
+            filters={filters}
+            handleChangeFilter={handleChangeFilter}
+            judFilterValue={judFilterValue}
+          ></Dropdown>
         </Box>
         <PhysicalSchemaTable setAllSelected={setAllSelected} setValue={setValue} data={data} selected={selected} setSelected={setSelected} />
       </DialogContent>
@@ -374,7 +325,7 @@ export default function PhysicalSchemaDailog(props) {
           checked={value}
           checkedIcon={<CheckBoxOutlinedIcon />}
           onChange={handleSelectAllClick}
-          
+
           inputProps={{
             'aria-label': 'Select all',
           }} />} label="Select All">
