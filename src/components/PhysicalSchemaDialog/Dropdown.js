@@ -9,7 +9,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
       backgroundColor: theme.palette.background.paper,
       border: '1px solid #767676',
       fontSize: 16,
-      marginTop: '8px',
+    //   marginTop: '8px',
       padding: '10px 26px 10px 12px',
       transition: theme.transitions.create(['border-color',]),
       // Use the system font instead of the default Roboto font.
@@ -50,7 +50,7 @@ export default function Dropdown(props) {
                 flexGrow: 0, display: 'flex',
                 flexDirection: 'row', columnGap: 1
             }}>
-                <FormControl style={{ width: '161px' }} variant="outlined">
+                <FormControl style={{ width: '161px' , height: '32px' }} variant="outlined">
                     <InputLabel shrink={false}
                         sx={{
                             fill: '#FFF',

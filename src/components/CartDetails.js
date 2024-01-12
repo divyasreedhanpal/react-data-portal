@@ -127,9 +127,9 @@ export default function CartDetails(props) {
                                 backgroundColor: '#FCFCFC'
                             }}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem key={10} value={10}>Ten</MenuItem>
+                            <MenuItem key={20} value={20}>Twenty</MenuItem>
+                            <MenuItem key={30} value={30}>Thirty</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
@@ -150,9 +150,9 @@ export default function CartDetails(props) {
                                 backgroundColor: '#FCFCFC'
                             }}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem key={10} value={10}>Ten</MenuItem>
+                            <MenuItem key={20} value={20}>Twenty</MenuItem>
+                            <MenuItem key={30} value={30}>Thirty</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>

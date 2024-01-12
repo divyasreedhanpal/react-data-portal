@@ -18,7 +18,8 @@ import activeIcon from '../assets/Active.png';
 import Divider from '@mui/material/Divider';
 import SubmitCart from './SubmitCart';
 import { useSelector } from 'react-redux';
-import { Badge, SvgIcon } from '@mui/material';
+import { Badge, Breadcrumbs, SvgIcon } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const pages = ['Home -> Physical Schema'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -26,11 +27,11 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function SubHeader() {
 
-  const [anchorElCart, setAnchorElCart] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElCart, setAnchorElCart] = React.useState(false);
+  const [anchorElUser, setAnchorElUser] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const cartItems = useSelector(state => state.cartItems.cartItems);
-  
+
 
   const handleOpenCartMenu = (event) => {
     setAnchorElCart(event.currentTarget);
@@ -80,11 +81,11 @@ function SubHeader() {
         }}>
           <svg width="50" height="24" viewBox="0 0 50 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Logo">
-              <path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd" d="M12.4072 24H37.2213V0H12.4072V24Z" fill="white" />
-              <path id="Fill 3" fill-rule="evenodd" clip-rule="evenodd" d="M12.4072 0L24.8143 12L37.2213 0H12.4072Z" fill="#DB0011" />
-              <path id="Fill 5" fill-rule="evenodd" clip-rule="evenodd" d="M12.4072 24H37.2213L24.8143 12L12.4072 24Z" fill="#DB0011" />
-              <path id="Fill 2" fill-rule="evenodd" clip-rule="evenodd" d="M37.2212 24L49.6282 12L37.2212 0V24Z" fill="#DB0011" />
-              <path id="Fill 4" fill-rule="evenodd" clip-rule="evenodd" d="M0 12L12.3518 23.9805L12.407 24V0L0 12Z" fill="#DB0011" />
+              <path id="Fill 1" fillRule="evenodd" clipRule="evenodd" d="M12.4072 24H37.2213V0H12.4072V24Z" fill="white" />
+              <path id="Fill 3" fillRule="evenodd" clipRule="evenodd" d="M12.4072 0L24.8143 12L37.2213 0H12.4072Z" fill="#DB0011" />
+              <path id="Fill 5" fillRule="evenodd" clipRule="evenodd" d="M12.4072 24H37.2213L24.8143 12L12.4072 24Z" fill="#DB0011" />
+              <path id="Fill 2" fillRule="evenodd" clipRule="evenodd" d="M37.2212 24L49.6282 12L37.2212 0V24Z" fill="#DB0011" />
+              <path id="Fill 4" fillRule="evenodd" clipRule="evenodd" d="M0 12L12.3518 23.9805L12.407 24V0L0 12Z" fill="#DB0011" />
             </g>
           </svg>
           <Typography
@@ -117,24 +118,16 @@ function SubHeader() {
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
+              open={false}
             >
-              {pages.map((page) => (
+              {pages.map(page =>
                 <MenuItem key={page}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-              ))}
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -165,6 +158,12 @@ function SubHeader() {
                 {page}
               </Button>
             ))}
+            {/* <Breadcrumbs aria-label="breadcrumb">
+              <Link color="white" href="/">
+                Home
+              </Link>
+              <Typography color="white">Physical Schema</Typography>
+            </Breadcrumbs> */}
           </Box>
 
           <Box sx={{
@@ -172,21 +171,19 @@ function SubHeader() {
             gap: 2,
           }}>
             <Tooltip title="Open cart items">
-              <IconButton onClick={handleOpenCartMenu}>
-                <IconButton sx={{ paddingRight: '32px' }} onClick={handleOpenCartMenu}>
-                  <Badge badgeContent={cartItems.length} color='secondary'>
-                    <SvgIcon>
-                      <path id="Icon colour" fill-rule="evenodd" clip-rule="evenodd" d="M20 17.3333H5.81467L6.892 14.6667H19.4187L24 3.33333H3.05867L1.71067 0H0V0.0346667L5.54133 13.7427L4.08933 17.3333H3.33333C2.22933 17.3333 1.33333 18.228 1.33333 19.3333C1.33333 20.4387 2.22933 21.3333 3.33333 21.3333C4.43733 21.3333 5.33333 20.4387 5.33333 19.3333C5.33333 19.196 5.32 19.0627 5.29333 18.9333H18.0413C18.0147 19.0627 18.0013 19.196 18.0013 19.3333C18.0013 20.4387 18.8973 21.3333 20.0013 21.3333C21.1053 21.3333 22.0013 20.4387 22.0013 19.3333C22.0013 18.228 21.104 17.3333 20 17.3333Z" fill="white" />
-                    </SvgIcon>
-                  </Badge>
-                </IconButton>
+              <IconButton sx={{ paddingRight: '32px' }} onClick={handleOpenCartMenu}>
+                <Badge badgeContent={cartItems.length} color='secondary'>
+                  <SvgIcon>
+                    <path id="Icon colour" fillRule="evenodd" clipRule="evenodd" d="M20 17.3333H5.81467L6.892 14.6667H19.4187L24 3.33333H3.05867L1.71067 0H0V0.0346667L5.54133 13.7427L4.08933 17.3333H3.33333C2.22933 17.3333 1.33333 18.228 1.33333 19.3333C1.33333 20.4387 2.22933 21.3333 3.33333 21.3333C4.43733 21.3333 5.33333 20.4387 5.33333 19.3333C5.33333 19.196 5.32 19.0627 5.29333 18.9333H18.0413C18.0147 19.0627 18.0013 19.196 18.0013 19.3333C18.0013 20.4387 18.8973 21.3333 20.0013 21.3333C21.1053 21.3333 22.0013 20.4387 22.0013 19.3333C22.0013 18.228 21.104 17.3333 20 17.3333Z" fill="white" />
+                  </SvgIcon>
+                </Badge>
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-cart"
               anchorReference="anchorPosition"
-              anchorPosition={{ top: 16, left: window.innerWidth - 90}}
+              anchorPosition={{ top: 16, left: window.innerWidth - 90 }}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -249,16 +246,15 @@ function SubHeader() {
             <Tooltip title="Open settings">
               <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
                 <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path id="Icon colour" fill-rule="evenodd" clip-rule="evenodd" d="M21.588 16.7C21.324 16.048 20.9507 15.4413 20.46 14.9373C19.2933 13.736 17.8333 12.8267 16.1107 12.268L12.0133 16.3653L7.908 12.26C6.176 12.8187 4.70933 13.7307 3.53733 14.9373C3.04667 15.4413 2.67333 16.048 2.41067 16.7L0 22.6667H24L21.588 16.7ZM12.0133 11.3333C15.2787 11.3333 16.6667 8.26933 16.6667 5.52133C16.6667 2.668 15.3053 0 12.0133 0C8.72133 0 7.33333 2.64133 7.33333 5.52133C7.33333 8.348 8.69333 11.3333 12.0133 11.3333Z" fill="white" />
+                  <path id="Icon colour" fillRule="evenodd" clipRule="evenodd" d="M21.588 16.7C21.324 16.048 20.9507 15.4413 20.46 14.9373C19.2933 13.736 17.8333 12.8267 16.1107 12.268L12.0133 16.3653L7.908 12.26C6.176 12.8187 4.70933 13.7307 3.53733 14.9373C3.04667 15.4413 2.67333 16.048 2.41067 16.7L0 22.6667H24L21.588 16.7ZM12.0133 11.3333C15.2787 11.3333 16.6667 8.26933 16.6667 5.52133C16.6667 2.668 15.3053 0 12.0133 0C8.72133 0 7.33333 2.64133 7.33333 5.52133C7.33333 8.348 8.69333 11.3333 12.0133 11.3333Z" fill="white" />
                 </svg>
-
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorReference="anchorPosition"
-              anchorPosition={{ top: 16, left: 1440 }}
+              anchorPosition={{ top: 16, left: window.innerWidth - 90 }}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',

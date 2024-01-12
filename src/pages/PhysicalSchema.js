@@ -8,6 +8,7 @@ import PhysicalSchemaCard from "../components/PhysicalSchemaCard";
 import FilterTab from "../components/FilterTab";
 import styled from '@emotion/styled';
 import React, { useState } from "react";
+import Header from "../components/Header";
 
 const SchemaCardWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -92,7 +93,7 @@ export default function PhysicalSchema() {
 
     return (
         <React.Fragment>
-            <SubHeader></SubHeader>
+            <Header></Header>
             <Grid container rowGap={2} sx={{
                 padding: '0 80px', marginTop: '32px', marginLeft: '0px', width: '100%', marginBottom: '16px'
             }}>
@@ -114,9 +115,8 @@ export default function PhysicalSchema() {
                         <Grid item xs={12} lg={6} md={6} sx={{
                             padding: 8
                         }}>
-                            <Typography variant="h2" sx={{
+                            <Typography variant="h2" color="secondary" sx={{
                                 width: '100%',
-                                color: 'red',
                                 fontWeight: 300,
                                 fontSize: '1.75rem',
                             }}>
@@ -146,14 +146,12 @@ export default function PhysicalSchema() {
                 </Grid>
                 <Grid item xs={12} lg={12} md={12}>
                     <Grid container columnGap={2} rowGap={4}>
-                        {/* <SchemaCardWrapper> */}
                         {filterCards.map(
                             e =>
-                                <Grid item xs>
+                                <Grid item key={e.id} xs>
                                     <PhysicalSchemaCard data={e}></PhysicalSchemaCard>
                                 </Grid>
                         )}
-                        {/* </SchemaCardWrapper> */}
                     </Grid>
                 </Grid>
             </Grid>

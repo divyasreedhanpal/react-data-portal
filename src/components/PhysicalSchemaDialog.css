@@ -28,7 +28,9 @@
 }
 
 .mr16 {
-    margin-right: 16px;
+    padding-right: 16px;
+    min-width: 30px;
+    height: fit-content;
 }
 
 .copyIcon {

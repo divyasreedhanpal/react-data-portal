@@ -20,7 +20,7 @@ import "./PhysicalSchemaDialog.css"
 import styled from '@emotion/styled';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { addCart } from '../reducers/cartReducer';
-import Dropdown from './PhysicalSchemaDialog/Dropdown';
+import Dropdown from './PhysicalSchmaDailog/Dropdown';
 
 
 const PopupTitleWrapper = styled('p')(({ theme }) => ({
@@ -43,8 +43,8 @@ const PopupContentWrapper = styled('p')(({ theme }) => ({
 const columns = [{ key: 'column1', label: 'Column 1' }, { key: 'column2', label: 'Column 2' }]
 const filters = [{ key: 'filter1', label: 'Filter 1' }, { key: 'filter2', label: 'Filter 2' }]
 
-export default function PhysicalSchemaDailog(props) {
-  const { onClose, data, open, ...other } = props;
+export default function PhysicalSchemaDailgoueContent(props) {
+  const { data } = props;
   const [value, setValue] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
   const [judColumnValue, setJudColumnValue] = React.useState('column1');
@@ -111,36 +111,6 @@ export default function PhysicalSchemaDailog(props) {
   // };
 
   return (
-    <Dialog
-      sx={{
-        '& .MuiDialog-paper': {
-          width: '100%', margin: '80px', borderRadius: '6px 6px 0px 0px',
-          background: '#F3F3F3',
-          boxShadow: '0px 6px 20px 0px rgba(0, 0, 0, 0.10)'
-        }, backgroundColor: '#F3F3F3'
-      }}
-      maxWidth="lg"
-      // TransitionProps={{ onEntering: handleEntering }}
-      open={open}
-      {...other}
-    >
-      <Box sx={
-        {
-          display: 'flex',
-          justifyContent: 'end',
-          padding: '10px 10px 0px 10px',
-          backgroundColor: '#F3F3F3'
-        }
-      }>
-        <IconButton
-          edge="start"
-          color="inherit"
-          onClick={handleCancel}
-          aria-label="close"
-        >
-          <img src={closeImage} alt="dashboard"></img>
-        </IconButton>
-      </Box>
       <DialogContent sx={{ padding: '0px 30px 24px 40px', backgroundColor: '#F3F3F3' }}>
         <Box sx={
           {
@@ -315,43 +285,9 @@ export default function PhysicalSchemaDailog(props) {
         </Box>
         <PhysicalSchemaTable setAllSelected={setAllSelected} setValue={setValue} data={data} selected={selected} setSelected={setSelected} />
       </DialogContent>
-      <DialogActions sx={{
-        justifyContent: 'space-between',
-        padding: '10px 30px 24px 40px',
-        backgroundColor: '#F3F3F3'
-      }}>
-        <FormControlLabel control={<Checkbox color="primary"
-          // indeterminate={numSelected > 0 && numSelected < rowCount}
-          checked={value}
-          checkedIcon={<CheckBoxOutlinedIcon />}
-          onChange={handleSelectAllClick}
-
-          inputProps={{
-            'aria-label': 'Select all',
-          }} />} label="Select All">
-        </FormControlLabel>
-        <Button onClick={handleAddCart} sx={{
-          color: '#FFF',
-          fontFamily: 'Univers Next for HSBC',
-          fontSize: '16px',
-          fontStyle: 'normal',
-          fontWeight: '400',
-          lineHeight: '24px',
-          backgroundColor: '#DB0011',
-          borderRadius: '0px',
-          textTransform: 'none',
-          '&:hover': {
-            backgroundColor: '#fff',
-            color: '#3c52b2',
-          },
-        }}>Add to cart</Button>
-      </DialogActions>
-    </Dialog>
   );
 }
 
-PhysicalSchemaDailog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
+PhysicalSchemaDailgoueContent.propTypes = {
   data: PropTypes.object.isRequired,
 };

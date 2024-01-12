@@ -239,7 +239,7 @@ export default function PhysicalSchemaTable(props) {
     return (
         <Box sx={{ width: '100%', paddingTop: '10px' }}>
             <Paper sx={{ width: '100%', borderRadius: '0px', boxShadow: 'none' }}>
-                <TableContainer style={{ maxHeight: 250 }} sx={{
+                <TableContainer style={{ maxHeight: 250, marginTop: 20 }} sx={{
                     '&::-webkit-scrollbar': {
                         backgroundColor: '#FCFCFC',
                         width: '10px',
@@ -282,7 +282,7 @@ export default function PhysicalSchemaTable(props) {
                                         sx={{
                                             cursor: 'pointer',
                                             height: '48px', borderRadius: '6px', background: '#FCFCFC',
-                                            '& td:first-child': {
+                                            '& td:first-of-type': {
                                                 borderRadius: '2px 0 0 2px'
                                             },
                                             '& td:last-child': {
